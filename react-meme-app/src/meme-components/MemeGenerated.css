@@ -1,0 +1,15 @@
+.meme_generated_div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+.generate_btn{
+    margin-bottom: 10px !important;
+    text-transform: inherit !important;
+    font-size: 20px !important;
+}
+h1{
+    font-weight: 400;
+}

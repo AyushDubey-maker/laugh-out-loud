@@ -1,0 +1,103 @@
+.meme-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #EAE7DC;
+   
+    
+}
+
+.meme-container-header>h1{
+    color: #E85A4F;
+    font-weight: 300 !important;
+    font-weight: 500;
+    font-size: 50px;
+}
+.meme-container-header>button{
+    width:60%;
+    padding: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    background-color: white;
+    color: #8E8D8A;
+   
+   
+}
+.meme-container-header{
+    text-align: center;
+}
+
+.meme_box{
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* overflow: hidden; */
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.prev_btn{
+    position: absolute;
+    top: 50%;
+    left: -90px;
+    font-size: 3rem !important;
+    color: black;
+    z-index: 10;
+    cursor: pointer;
+    user-select: none;
+}
+.prev_btn:hover,.next_btn:hover{
+    color: blue !important;
+}
+.next_btn{
+    position: absolute;
+    top: 50%;
+    right: -90px;
+    font-size: 3rem !important;
+    color: black;
+    z-index: 10;
+    cursor: pointer;
+    user-select: none;
+}
+.meme_box>img{
+    height: 450px;
+    /* border: 1px solid black; */
+    padding: 10px;
+    max-width: 600px;
+}
+.save_btn_grp{
+    display: flex;
+    /* flex-direction: column; */
+    margin-top: 15px;
+    margin-bottom: 50px;
+  
+}
+.save_btn_grp>button{
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-right: 12px;
+    cursor: pointer;
+    text-transform: inherit  !important;
+  
+}
+
+@media screen and (max-width: 600px) {
+    .next_btn{
+        right: -40px;
+    }
+    .prev_btn{
+        left: -40px;
+    }
+    .meme_box>img{
+        max-width: 400px;
+    }
+}
