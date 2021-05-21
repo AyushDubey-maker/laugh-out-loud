@@ -43,8 +43,8 @@ function GenerateMeme() {
     // Here we are sending the caption and image to the API and then Api is building up the Meme
     const currentMeme = generatememes[memeIndex];
     const formData = new FormData();
-    formData.append("username", "AyushDubey1");
-    formData.append("password", "pinknblues");
+    formData.append("username", "your_username_here");
+    formData.append("password", "your_password_here");
     formData.append("template_id", currentMeme.id);
     captions.forEach((c, index) => formData.append(`boxes[${index}][text]`, c));
 

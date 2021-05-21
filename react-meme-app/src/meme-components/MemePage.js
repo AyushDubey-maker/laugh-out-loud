@@ -47,7 +47,7 @@ function MemePage() {
       useEffect(() => {
         fetch('https://meme-api.herokuapp.com/gimme/50').then(res => {
           res.json().then(res => {
-            //   for(let i=0;i<50;i++){
+          
             const _memes = res.memes;
             shuffleMemes(_memes);
             setMemes(_memes);
@@ -57,7 +57,7 @@ function MemePage() {
     });
 }, []);
 
-    //   
+    
     return (
      
     <div className='meme-container'>

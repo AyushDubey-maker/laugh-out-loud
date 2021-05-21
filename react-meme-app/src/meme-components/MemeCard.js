@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { db } from '../firebase'
-//import { GlobalContext } from '../redux/save-meme/GlobalState';
 import './MemeCard.css'
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import firebase from 'firebase'

@@ -8,7 +8,7 @@ function Login() {
     const history=useHistory()
     const handleLogin=()=>{
         auth.signInWithPopup(provider).then((result)=>{
-        //    setUser(result.user)
+     
         history.push('/')
         }).catch((error)=>alert(error.message))
     }
