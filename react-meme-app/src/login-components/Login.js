@@ -4,8 +4,10 @@ import { auth, provider } from '../firebase'
 import GoogleButton from 'react-google-button'
 import './Login.css'
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import { Button } from '@material-ui/core'
 function Login() {
     const history=useHistory()
+    // Login through Google SignUp-->Firebase
     const handleLogin=()=>{
         auth.signInWithPopup(provider).then((result)=>{
      
@@ -19,6 +21,7 @@ function Login() {
             <div className='login_component'>
             <h2>Login User <PersonAddIcon fontSize="large"/></h2>
             <GoogleButton onClick={handleLogin}>Sign-In With Google</GoogleButton>
+            <Button className="button" onClick={()=>history.push("/")} variant="contained" color="primary">Login Later</Button>
             </div>
         </div>
     )
