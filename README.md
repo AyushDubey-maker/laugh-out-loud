@@ -1,4 +1,6 @@
-> ## It is a React Memes App where user can view random memes and also create some.
+ ## Laugh Out Loud
+ 
+ ### `It is a React Memes App where user can view random memes and also create some.`
 
 > ***This app is built on React and for user saving their favorite meme 'Firebase' is used.***
 
