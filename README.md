@@ -4,6 +4,8 @@
 
 > ***This app is built on React and for user saving their favorite meme 'Firebase' is used.***
 
+**Getting Started with React**: *https://github.com/AyushDubey-maker/laugh-out-loud/blob/master/react-meme-app/README.md*
+
 ```
 API'S Used:
 - For Fetching random memes: https://meme-api.herokuapp.com/gimme/50
