@@ -14,6 +14,8 @@ API'S Used:
 
 Learn more about Memes Generator API: https://imgflip.com/api
 
+Note: To generate memes you have to make a free account on https://imgflip.com/ to get a username and password for the API.
+
 ```
 
 ### `Packages to be installed:`
