@@ -58,3 +58,9 @@ https://github.com/AyushDubey-maker/expense-tracker-react/blob/master/expense-tr
 <p>Saved Memes Page:</p>
 <img src="./react-meme-app/public/git-images/meme-saved.png"/>
 </details>
+
+> ### Features 📣 :
+- View Random memes  
+- Save your favourite memes by login into your Google account.
+- Create your own meme from provided templates.
+- Your Created memes will also get saved in your account.
