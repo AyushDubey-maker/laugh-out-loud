@@ -8,6 +8,7 @@ import BookmarkBorderOutlinedIcon from "@material-ui/icons/BookmarkBorderOutline
 import "./MemePage.css";
 import firebase from "firebase";
 import { Button } from "@material-ui/core";
+import Spinner from 'react-spinkit'
 function MemePage() {
   const [memes, setMemes] = useState([]);
   const [memeIndex, setMemeIndex] = useState(1);
@@ -97,7 +98,13 @@ function MemePage() {
         {memes.length > 0 ? (
           <img alt="meme" src={memes[memeIndex].url} />
         ) : (
-          <p>Oops Memes over..Now do some Work Don't waste time</p>
+          // <p>Oops Memes over..Now do some Work Don't waste time</p>
+          <div className="app_loading">
+            <div className="app_loading_container">
+              
+            <Spinner name="ball-spin-fade-loader" color="purple" fadeIn="none"/>
+              </div>
+          </div>
         )}
 
         {memeIndex > 0 && (

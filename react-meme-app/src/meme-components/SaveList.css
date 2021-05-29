@@ -47,6 +47,10 @@
   }
  .no-memes-div{
    margin-top: 30px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
  }
  .no-memes-div>h2{
    font-size: 30px;
