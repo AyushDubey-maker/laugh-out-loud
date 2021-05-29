@@ -5,7 +5,9 @@
 
  ***This app is built on React and for user saving their favorite meme 'Firebase' is used.***
 
-- **Getting Started with React**: *https://github.com/AyushDubey-maker/laugh-out-loud/blob/master/react-meme-app/README.md*
+
+
+- **Getting Started with React**: <a href="https://github.com/AyushDubey-maker/laugh-out-loud/blob/master/react-meme-app/README.md"> <img alt="React" src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"/></a>
 
 ```
 API'S Used:
@@ -36,7 +38,8 @@ use-clipboard-copy
 
 `Note:Do not forget to create your firebase Project and add the firebase config file in your code`
 
-
+ <img alt="Firebase" src="https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase"/>
+ 
 - Get started with Firebase (Web): https://firebase.google.com/docs/web/setup
 
 - Firebase React Setup:
