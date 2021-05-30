@@ -37,9 +37,9 @@ use-clipboard-copy
 ```
 
 `Note:Do not forget to create your firebase Project and add the firebase config file in your code`
-
+  <a href="https://console.firebase.google.com/u/0/">
  <img alt="Firebase" src="https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase"/>
- 
+ </a>
 - Get started with Firebase (Web): https://firebase.google.com/docs/web/setup
 
 - Firebase React Setup:
