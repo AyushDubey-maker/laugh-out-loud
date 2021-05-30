@@ -2,10 +2,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
-    /* display: flex;
-    flex-direction: row;
-    margin-left: 40px;
-    overflow-x: none; */
   }
   .saveList_header{
     display: flex;
@@ -33,8 +29,6 @@
   @media screen and (max-width: 1200px) {
     .movie-grid {
       grid-template-columns: repeat(2, 1fr);
-      /* flex-direction: column;
-      margin-left:40px ; */
     }
  
   }
