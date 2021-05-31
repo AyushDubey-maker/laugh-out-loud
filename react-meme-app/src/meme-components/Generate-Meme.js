@@ -10,7 +10,7 @@ function GenerateMeme() {
   const [generatememes, setGenerateMemes] = useState([]);
   const [memeIndex, setMemeIndex] = useState(0);
   const [captions, setCaptions] = useState([]);
-
+ 
   // UseEffect to check whether user is logged in or not..
   const [authuser, setUser] = useState(null);
   useEffect(() => {
@@ -43,8 +43,8 @@ function GenerateMeme() {
     // Here we are sending the caption and image to the API and then Api is building up the Meme
     const currentMeme = generatememes[memeIndex];
     const formData = new FormData();
-    formData.append("username", "your_username_here");
-    formData.append("password", "your_password_here");
+    formData.append("username",process.env.REACT_APP_USERNAME);
+    formData.append("password", process.env.REACT_APP_PASSWORD);
     formData.append("template_id", currentMeme.id);
     captions.forEach((c, index) => formData.append(`boxes[${index}][text]`, c));
 
@@ -93,9 +93,18 @@ function GenerateMeme() {
 
   return (
     <div className="generate_meme_div">
-      <Button variant="contained" color="primary" onClick={generateMeme}>
-        Generate your meme
+      
+     
+      <Button
+        className="go_back_btn"
+        variant="outlined"
+        color="primary"
+        onClick={() => history.push("/")}
+      >
+        <ArrowBackIcon/>
+        Go Back Viewing Memes
       </Button>
+   
       <div className="input_conatiner">
         {generatememes.length > 0 &&
           captions.map((c, index) => (
@@ -106,6 +115,9 @@ function GenerateMeme() {
             />
           ))}
       </div>
+      <Button className="generate_meme_btn" variant="contained" color="primary" onClick={generateMeme}>
+        Generate your meme
+      </Button>
       <p> {generatememes.length > 0 && generatememes[memeIndex].name}</p>
       <div className="meme_box">
         {generatememes.length > 0 ? (
@@ -135,14 +147,7 @@ function GenerateMeme() {
           Next
         </ArrowForwardIcon>
       </div>
-      <Button
-        className="go_back_btn"
-        variant="outlined"
-        color="primary"
-        onClick={() => history.push("/")}
-      >
-        Go Back Viewing Memes
-      </Button>
+     
     </div>
   );
 }

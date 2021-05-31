@@ -1,12 +1,12 @@
 import React, {  useEffect, useState } from 'react'
 import { auth, db } from '../firebase';
-
 import MemeCard from './MemeCard';
 import './SaveList.css'
 import firebase from 'firebase'
 import { useHistory } from 'react-router';
 import { Button } from '@material-ui/core';
 import { ArrowBackIos } from '@material-ui/icons';
+import Spinner from 'react-spinkit'
 function SaveList() {
   
     const [savelist,setSavelist]=useState([])
@@ -54,6 +54,7 @@ function SaveList() {
         ) : (
           <div className="no-memes-div">
           <h2 className="no-memes">No memes saved! Add some!</h2>
+          <Spinner name="ball-spin-fade-loader" color="purple" fadeIn="none"/>
           <Button variant="contained" color="primary" onClick={()=>history.push('/')}>Go Back To HomePage</Button>
           </div>
         )} 

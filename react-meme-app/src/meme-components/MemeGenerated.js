@@ -38,7 +38,7 @@ function MemeGenerated() {
       >
         Make More Memes
       </Button>
-      <Button className="generate_btn" variant="outlined" onClick={copyLink}>
+      <Button className="copy_url_btn" variant="outlined" onClick={copyLink}>
         {copied ? "Link copied!" : "Copy link"} 💬
       </Button>
       <div className="meme_box">{url && <img src={url} alt="" />}</div>

@@ -8,12 +8,29 @@
 .generate_meme_div{
     display: flex;
     flex-direction: column;
+    position: relative;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
-    overflow-y:hidden !important ;
-   
-  
+    /* margin-top: 20px; */
+    overflow:hidden !important ;
+    height: 100%;
+}
+.generate_meme_div::before{
+content: "";
+position: absolute;
+top: 0px;
+left: 0px;
+right: 0px;
+bottom: 0px;
+background: url('../login-components/background-img.jpg');
+background-repeat: no-repeat;
+background-size: cover;
+z-index: -1;
+}
+
+.generate_meme_btn{
+ margin-top: 10px !important;
+ text-transform: inherit !important;
 }
 p{
     font-size: 22px;
@@ -22,16 +39,19 @@ p{
 .go_back_btn{
     margin-top: 10px !important;
     text-transform: inherit !important;
+    margin-right: auto !important;
+    margin-left: 10% !important;
 }
 .go_back_btn:hover{
   color: blue;
  
 }
 .input_conatiner{
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+  
    
 }
 .input_conatiner>input{
