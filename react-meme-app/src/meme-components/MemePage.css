@@ -68,13 +68,11 @@
 }
 .meme_box>img{
     height: 450px;
-    /* border: 1px solid black; */
     padding: 10px;
     max-width: 600px;
 }
 .save_btn_grp{
     display: flex;
-    /* flex-direction: column; */
     margin-top: 15px;
     margin-bottom: 50px;
   
