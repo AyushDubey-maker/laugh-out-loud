@@ -30,6 +30,7 @@ function MemeGenerated() {
   return (
     <div className="meme_generated_div">
       <h1>Wonderful! You are a memer now</h1>
+      <div>
       <Button
         className="generate_btn"
         variant="contained"
@@ -41,17 +42,20 @@ function MemeGenerated() {
       <Button className="copy_url_btn" variant="outlined" onClick={copyLink}>
         {copied ? "Link copied!" : "Copy link"} 💬
       </Button>
+      </div>
       <div className="meme_box">{url && <img src={url} alt="" />}</div>
+     <div className="meme_generated_footer">
       <p>
         Your meme is saved in your savelist{" "}
         <Button
-          variant="outlined"
+          variant="contained"
           color="primary"
           onClick={() => history.push("/save")}
         >
           Checkout
         </Button>
       </p>
+      </div>
     </div>
   );
 }

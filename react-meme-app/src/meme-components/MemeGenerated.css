@@ -24,6 +24,15 @@ z-index: -1;
     text-transform: inherit !important;
     font-size: 16px !important;
 }
-h1{
+.meme_generated_div>h1{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0 !important;
+    margin-top: 5px !important;
+    margin-bottom: 3px !important;
     font-weight: 400;
+}
+
+
+.meme_generated_footer>p{
+    font-family: 'Times New Roman', Times, serif;
 }
