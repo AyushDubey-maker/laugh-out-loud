@@ -56,7 +56,7 @@ https://github.com/AyushDubey-maker/expense-tracker-react/blob/master/expense-tr
 <img src="./react-meme-app/public/git-images/meme-login.png"/>
 <img src="./react-meme-app/public/git-images/meme-home-2.png"/>
 <p>Generate Memes:</p>
-<img src="./react-meme-app/public/git-images/meme-generate.png"/>
+<img src="./react-meme-app/public/git-images/meme-generate-1.png"/>
 <img src="./react-meme-app/public/git-images/meme-generate-2.png"/>
 <p>Saved Memes Page:</p>
 <img src="./react-meme-app/public/git-images/meme-saved.png"/>
