@@ -4,17 +4,25 @@
     align-items: center;
     justify-content: center;
     background-color: #EAE7DC;
-   
+    height: 100vh;
     
 }
-
-.meme-container-header>h1{
+.meme-container-header-h{
+    flex: 0.6;
+    text-align: start;
+}
+.meme-container-header-h>h1{
     color: #E85A4F;
     font-weight: 300 !important;
     font-weight: 500;
     font-size: 50px;
+    padding-left: 5%;
 }
-.meme-container-header>button{
+.meme-container-header-b{
+    margin: auto;
+    flex: 0.4;
+}
+.meme-container-header-b>button{
     width:60%;
     padding: 6px;
     font-size: 16px;
@@ -25,7 +33,11 @@
    
    
 }
+
 .meme-container-header{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
     text-align: center;
 }
 

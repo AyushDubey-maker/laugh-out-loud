@@ -46,9 +46,10 @@ function MemePage() {
       array[j] = temp;
     }
   };
+
   // Fetching Random Memes through this api
   useEffect(() => {
-    fetch("https://meme-api.herokuapp.com/gimme/50").then((res) => {
+    fetch("https://meme-api.com/gimme/50").then((res) => {
       res
         .json()
         .then((res) => {
@@ -63,8 +64,12 @@ function MemePage() {
   return (
     <div className="meme-container">
       <div className="meme-container-header">
+        <div className="meme-container-header-h">
         <h1>
           Laugh Out Loud 😁{" "}
+        </h1>
+        </div>
+        <div className="meme-container-header-b">
           {user && (
             <Button
               variant="outlined"
@@ -75,7 +80,6 @@ function MemePage() {
               Create Your Own Memes 🖍
             </Button>
           )}
-        </h1>
         {user ? (
           <Button
             variant="outlined"
@@ -93,6 +97,7 @@ function MemePage() {
             Login to Save Memes
           </Button>
         )}
+        </div>
       </div>
       <div className="meme_box">
         {memes.length > 0 ? (
