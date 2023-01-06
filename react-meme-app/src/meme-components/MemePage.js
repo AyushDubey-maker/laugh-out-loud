@@ -21,6 +21,7 @@ function MemePage() {
         setUser(authUser);
       }
     });
+
     // eslint-disable-next-line
   }, []);
   const fire_user = firebase.auth().currentUser;
@@ -77,7 +78,7 @@ function MemePage() {
               className="create_memes_btn"
               onClick={() => history.push("/generate-meme")}
             >
-              Create Your Own Memes 🖍
+              Welcome {user.displayName}, Create Your Own Memes 🖍
             </Button>
           )}
         {user ? (
@@ -112,7 +113,7 @@ function MemePage() {
           </div>
         )}
 
-        {memeIndex > 0 && (
+        {memes.length > 0 && memeIndex > 0 && (
           <ArrowBackIcon
             titleAccess="Previous Meme"
             className="prev_btn"
@@ -121,6 +122,7 @@ function MemePage() {
             Previous
           </ArrowBackIcon>
         )}
+        {memes.length > 0 &&(
         <ArrowForwardIcon
           titleAccess="Next Meme"
           className="next_btn"
@@ -128,6 +130,7 @@ function MemePage() {
         >
           Next
         </ArrowForwardIcon>
+        )}
       </div>
       <div className="save_btn_grp">
         {user && (

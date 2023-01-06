@@ -23,14 +23,15 @@
     flex: 0.4;
 }
 .meme-container-header-b>button{
-    width:60%;
+    /* width:60%; */
     padding: 6px;
-    font-size: 16px;
+    font-size: 14px;
+    text-transform: none;
     cursor: pointer;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     background-color: white;
     color: #8E8D8A;
-   
+    margin-right: 2%;
    
 }
 

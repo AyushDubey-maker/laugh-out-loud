@@ -37,12 +37,13 @@ function SaveList() {
       },[authuser]);
     
     return (
-        <div>
+        <div className='saveList'>
           <div className="saveList_header">
-            <ArrowBackIos className='back_icon' onClick={()=>history.push('/')}/>
+          <Button variant="contained" color="primary" onClick={()=>history.push('/')}><ArrowBackIos className='back_icon'/>Home</Button>
+            {/* <ArrowBackIos className='back_icon' onClick={()=>history.push('/')}/> */}
           <h1>Your Saved Memes</h1>
-          <img className='meme_header_img' alt="" src="https://freepngimg.com/download/internet_meme/3-2-troll-face-meme-png.png"/>
-   
+          {/* <img className='meme_header_img' alt="" src="https://freepngimg.com/download/internet_meme/3-2-troll-face-meme-png.png"/> */}
+            <h1>😁</h1>
            </div>
             {savelist.length > 0 ? (
           <div className="movie-grid">
@@ -53,9 +54,9 @@ function SaveList() {
           
         ) : (
           <div className="no-memes-div">
-          <h2 className="no-memes">No memes saved! Add some!</h2>
+          {/* <h2 className="no-memes">No memes saved! Add some!</h2> */}
           <Spinner name="ball-spin-fade-loader" color="purple" fadeIn="none"/>
-          <Button variant="contained" color="primary" onClick={()=>history.push('/')}>Go Back To HomePage</Button>
+          {/* <Button variant="contained" color="primary" onClick={()=>history.push('/')}>Go Back To HomePage</Button> */}
           </div>
         )} 
         </div>
