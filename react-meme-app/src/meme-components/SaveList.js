@@ -12,6 +12,9 @@ function SaveList() {
     const [savelist,setSavelist]=useState([])
     const user=firebase.auth().currentUser;
     const history=useHistory()
+    const [haveMemes,setHaveMemes]=useState(true);
+    const [memeCounter,setMemeCounter]=useState(0);
+    
     useEffect(()=>{
       db.collection('user-memes').doc(user?.uid).collection('memes').orderBy('timestamp','desc').onSnapshot(snapshot=>(
         setSavelist(snapshot.docs.map(doc=>({
@@ -19,6 +22,8 @@ function SaveList() {
           data:doc.data()
         })))
       ))
+ 
+      
       // eslint-disable-next-line
       },[savelist])
 
@@ -35,6 +40,22 @@ function SaveList() {
       })
       // eslint-disable-next-line
       },[authuser]);
+// Use Effect to check if the user account has any memes or not
+      function changeCounter(){
+        setTimeout(() => {
+        setMemeCounter(1);
+      }, 5000); 
+      }
+      useEffect(()=>{
+        changeCounter();
+      })
+
+    useEffect(()=>{
+      if(memeCounter===1 && savelist.length===0){
+        setHaveMemes(false)
+      }
+    },[memeCounter,savelist])
+   
     
     return (
         <div className='saveList'>
@@ -52,13 +73,20 @@ function SaveList() {
             ))}
           </div>
           
-        ) : (
+        ) : haveMemes===true &&(
           <div className="no-memes-div">
           {/* <h2 className="no-memes">No memes saved! Add some!</h2> */}
           <Spinner name="ball-spin-fade-loader" color="purple" fadeIn="none"/>
           {/* <Button variant="contained" color="primary" onClick={()=>history.push('/')}>Go Back To HomePage</Button> */}
           </div>
         )} 
+
+        {/* If User Has No Memes */}
+        {haveMemes===false &&(
+           <div className="no-memes-div">
+            <h2 className="no-memes">No memes saved!</h2>
+           </div>
+        )}
         </div>
     )
 }

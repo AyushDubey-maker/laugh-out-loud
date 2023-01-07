@@ -54,6 +54,7 @@
  .no-memes-div>h2{
    font-size: 30px;
    color: gray;
+   font-weight: 300;
  }
  .no-memes-div>button{
    padding: 12px;
