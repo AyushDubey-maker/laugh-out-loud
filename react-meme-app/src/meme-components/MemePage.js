@@ -85,6 +85,7 @@ function MemePage() {
           <Button
             variant="outlined"
             color="secondary"
+            className="logout_btn"
             onClick={() => auth.signOut().then(() => setUser(null))}
           >
             Logout

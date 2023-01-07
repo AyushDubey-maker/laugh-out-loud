@@ -114,12 +114,12 @@ function GenerateMeme() {
               key={index}
             />
           ))}
-      </div>
       <Button className="generate_meme_btn" variant="contained" color="primary" onClick={generateMeme}>
         Generate your meme
       </Button>
-      <p> {generatememes.length > 0 && generatememes[memeIndex].name}</p>
+      </div>
       <div className="meme_box">
+      <p> {generatememes.length > 0 && generatememes[memeIndex].name}</p>
         {generatememes.length > 0 ? (
           <img
             className="meme_img"

@@ -3,7 +3,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #EAE7DC;
+    /* background-color: #EAE7DC; */
+    background-image: linear-gradient(to right, #0f0c29, #302b63, #24243e);
     height: 100vh;
     
 }
@@ -12,9 +13,10 @@
     text-align: start;
 }
 .meme-container-header-h>h1{
-    color: #E85A4F;
+    /* color: #E85A4F; */
+    color: white;
     font-weight: 300 !important;
-    font-weight: 500;
+  
     font-size: 50px;
     padding-left: 5%;
 }
@@ -29,12 +31,25 @@
     text-transform: none;
     cursor: pointer;
     /* margin-bottom: 10px; */
-    background-color: white;
-    color: #8E8D8A;
+    /* background-color: white;
+    color: #8E8D8A; */
+    background-color: rgb(36, 35, 35) ;
+    color: white ;
     margin-right: 2%;
    
 }
-
+.meme-container-header-b>button:hover{
+   
+    color: rgb(36, 35, 35) ;
+    background-color: white ;
+}
+.logout_btn{
+    color: white;
+    background-color: rgb(249, 99, 99) !important;
+}
+.logout_btn:hover{
+    color: white !important;
+}
 .meme-container-header{
     display: flex;
     justify-content: space-around;
@@ -49,26 +64,28 @@
     justify-content: center;
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-image: linear-gradient(to right, #434370, #59539e, #434370);;
 }
 .prev_btn{
     position: absolute;
     top: 50%;
     left: -90px;
     font-size: 3rem !important;
-    color: black;
+    color: white;
     z-index: 10;
     cursor: pointer;
     user-select: none;
 }
 .prev_btn:hover,.next_btn:hover{
-    color: blue !important;
+    color: gray !important;
+    
 }
 .next_btn{
     position: absolute;
     top: 50%;
     right: -90px;
     font-size: 3rem !important;
-    color: black;
+    color: white;
     z-index: 10;
     cursor: pointer;
     user-select: none;
@@ -92,7 +109,13 @@
     margin-right: 12px;
     cursor: pointer;
     text-transform: inherit  !important;
-  
+    
+    background-color: rgb(36, 35, 35) ;
+    color: white ;
+}
+.save_btn_grp>button:hover{
+    background-color: white;
+    color:  rgb(36, 35, 35);
 }
 
 @media screen and (max-width: 600px) {

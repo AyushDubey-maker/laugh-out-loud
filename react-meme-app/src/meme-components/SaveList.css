@@ -1,5 +1,6 @@
 .saveList{
-  background-color: #EAE7DC;
+  /* background-color: #EAE7DC; */
+  background-image: linear-gradient(to right, #0f0c29, #302b63, #24243e);
 }
 .movie-grid {
     display: grid;

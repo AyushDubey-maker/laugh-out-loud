@@ -7,6 +7,13 @@
     height: 100%;
 
 }
+.login_div>h1{
+    color: #E85A4F;
+    font-weight: 300 !important;
+ 
+    font-size: 50px;
+    padding-left: 5%;
+}
  /* Setting up the background Image */
 .login_div::after{
 content: '';
