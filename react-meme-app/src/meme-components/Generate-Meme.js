@@ -97,8 +97,7 @@ function GenerateMeme() {
      
       <Button
         className="go_back_btn"
-        variant="outlined"
-        color="primary"
+        variant="contained" color="primary"
         onClick={() => history.push("/")}
       >
         <ArrowBackIcon/>

@@ -83,12 +83,12 @@ function MemePage() {
           )}
         {user ? (
           <Button
-            variant="outlined"
+            variant="contained"
             color="secondary"
             className="logout_btn"
             onClick={() => auth.signOut().then(() => setUser(null))}
           >
-            Logout
+          LOGOUT
           </Button>
         ) : (
           <Button
@@ -109,7 +109,7 @@ function MemePage() {
           <div className="app_loading">
             <div className="app_loading_container">
               
-            <Spinner name="ball-spin-fade-loader" color="purple" fadeIn="none"/>
+            <Spinner name="ball-spin-fade-loader" color="white" fadeIn="none"/>
               </div>
           </div>
         )}
@@ -134,7 +134,7 @@ function MemePage() {
         )}
       </div>
       <div className="save_btn_grp">
-        {user && (
+        {user && memes.length > 0  &&(
           <Button
             variant="contained"
             color="primary"
@@ -145,7 +145,7 @@ function MemePage() {
           </Button>
         )}
 
-        {user && (
+        {user && memes.length > 0 &&(
           <Button
             variant="outlined"
             color="primary"

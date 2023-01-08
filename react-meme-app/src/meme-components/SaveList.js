@@ -76,7 +76,7 @@ function SaveList() {
         ) : haveMemes===true &&(
           <div className="no-memes-div">
           {/* <h2 className="no-memes">No memes saved! Add some!</h2> */}
-          <Spinner name="ball-spin-fade-loader" color="purple" fadeIn="none"/>
+          <Spinner name="ball-spin-fade-loader" color="white" fadeIn="none"/>
           {/* <Button variant="contained" color="primary" onClick={()=>history.push('/')}>Go Back To HomePage</Button> */}
           </div>
         )} 

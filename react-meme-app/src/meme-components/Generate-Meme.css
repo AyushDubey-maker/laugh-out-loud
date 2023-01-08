@@ -21,7 +21,7 @@
     margin-bottom: 4%;
 }
 .meme_box>p{
-    color: white;
+    color: #edf4fb;
 
 }
 .generate_meme_div::before{
@@ -37,7 +37,7 @@ background-size: cover;
 z-index: -1;
 }
 .generate_meme_div>p{
-    color: white;
+    color: #edf4fb;
 }
 .generate_meme_btn{
  margin-top: 10px !important;
@@ -53,10 +53,7 @@ p{
     margin-right: auto !important;
     margin-left: 10% !important;
 }
-.go_back_btn:hover{
-  color: blue;
- 
-}
+
 .input_conatiner{
     margin-top: 10px;
     display: flex;

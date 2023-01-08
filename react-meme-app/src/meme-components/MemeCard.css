@@ -12,7 +12,7 @@
     transition: 100ms ease-in-out;
     margin-top: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    background-color: white;
+    background-color: #edf4fb;
 }
 .meme_card:hover{
     cursor: pointer;
@@ -27,4 +27,11 @@
 
 .meme_card>img{
     height: 300px;
+}
+
+.buttons_d{
+    margin-top:10px;
+}
+.buttons_d>button{
+    margin-right:8px;
 }

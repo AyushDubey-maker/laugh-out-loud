@@ -14,7 +14,7 @@
 }
 .meme-container-header-h>h1{
     /* color: #E85A4F; */
-    color: white;
+    color: #edf4fb;
     font-weight: 300 !important;
   
     font-size: 50px;
@@ -33,22 +33,27 @@
     /* margin-bottom: 10px; */
     /* background-color: white;
     color: #8E8D8A; */
-    background-color: rgb(36, 35, 35) ;
-    color: white ;
+    /* background-color: rgb(36, 35, 35) ; */
+    background-color: #3f51b5;
+    color: #edf4fb ;
     margin-right: 2%;
    
 }
 .meme-container-header-b>button:hover{
    
-    color: rgb(36, 35, 35) ;
-    background-color: white ;
+    /* color: rgb(36, 35, 35) ;
+    background-color: #edf4fb ; */
+    color: #3f51b5;
+    background-color: #edf4fb ;
 }
 .logout_btn{
-    color: white;
+    letter-spacing: 3px !important;
+    color: #edf4fb;
     background-color: rgb(249, 99, 99) !important;
 }
 .logout_btn:hover{
-    color: white !important;
+    color: #edf4fb !important;
+    background-color: rgb(249, 99, 99) !important;
 }
 .meme-container-header{
     display: flex;
@@ -71,7 +76,7 @@
     top: 50%;
     left: -90px;
     font-size: 3rem !important;
-    color: white;
+    color: #edf4fb;
     z-index: 10;
     cursor: pointer;
     user-select: none;
@@ -85,7 +90,7 @@
     top: 50%;
     right: -90px;
     font-size: 3rem !important;
-    color: white;
+    color: #edf4fb;
     z-index: 10;
     cursor: pointer;
     user-select: none;
@@ -109,13 +114,16 @@
     margin-right: 12px;
     cursor: pointer;
     text-transform: inherit  !important;
-    
-    background-color: rgb(36, 35, 35) ;
-    color: white ;
+    color: #edf4fb;
+    background-color: #3f51b5;
+    /* background-color: rgb(36, 35, 35) ;
+    color: #edf4fb ; */
 }
 .save_btn_grp>button:hover{
-    background-color: white;
-    color:  rgb(36, 35, 35);
+    color: #3f51b5;
+    background-color: #edf4fb !important;
+    /* background-color: #edf4fb;
+    color:  rgb(36, 35, 35); */
 }
 
 @media screen and (max-width: 600px) {
