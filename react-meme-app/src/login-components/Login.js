@@ -21,7 +21,7 @@ function Login() {
             <div className='login_component'>
             <h2>Login User <PersonAddIcon fontSize="large"/></h2>
             
-            <GoogleButton onClick={handleLogin} style={{"marginLeft":"30px"}}>Sign-In With Google</GoogleButton>
+            <GoogleButton className='googleButton' onClick={handleLogin} style={{"marginLeft":"30px"}}>Sign-In With Google</GoogleButton>
             <Button className="button" onClick={()=>history.push("/")} style={{"marginLeft":"30px"}} variant="contained" color="primary">Login Later</Button>
            
             </div>

@@ -61,3 +61,18 @@
    padding: 12px;
    text-transform: inherit !important;
  }
+
+ @media screen and (max-width: 500px) {
+  .saveList_header>button{
+    font-size: 12px;
+  } 
+  .saveList_header>.saveList_header-h{
+    font-size: 15px;
+  }
+  .saveList_header-t{
+   font-size: 30px;
+  }
+  .movie-grid{
+    margin-left: 0px;
+  }
+}

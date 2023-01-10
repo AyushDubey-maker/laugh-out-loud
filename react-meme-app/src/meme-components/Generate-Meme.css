@@ -80,3 +80,18 @@ p{
     margin-bottom: 10px;
 }
 }
+
+@media screen and (max-width: 500px) {
+    .generate_meme_div_header{
+        position: fixed;
+        top: 0px;
+    }
+    .meme_box{
+        margin-top: 75%;
+    }
+    .meme_box>p{
+        font-size: 16px;
+        margin-top: 0px;
+        padding-bottom: 10px;
+    }
+}

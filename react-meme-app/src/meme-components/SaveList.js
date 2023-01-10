@@ -62,9 +62,9 @@ function SaveList() {
           <div className="saveList_header">
           <Button variant="contained" color="primary" onClick={()=>history.push('/')}><ArrowBackIos className='back_icon'/>Home</Button>
             {/* <ArrowBackIos className='back_icon' onClick={()=>history.push('/')}/> */}
-          <h1>Your Saved Memes</h1>
+          <h1 className="saveList_header-h">Your Saved Memes</h1>
           {/* <img className='meme_header_img' alt="" src="https://freepngimg.com/download/internet_meme/3-2-troll-face-meme-png.png"/> */}
-            <h1>😁</h1>
+            <h1 className="saveList_header-t">😁</h1>
            </div>
             {savelist.length > 0 ? (
           <div className="movie-grid">

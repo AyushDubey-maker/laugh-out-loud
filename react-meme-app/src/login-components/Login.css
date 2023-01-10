@@ -31,8 +31,6 @@ z-index: -1;
 }
 
 .login_div>h1{
-    font-weight: 600;
-    
     z-index: 100;
 }
 .login_div>img{
@@ -61,4 +59,16 @@ z-index: -1;
     margin-top: 10px !important;
     text-transform: inherit !important;
     width: 80%;
+}
+
+@media screen and (max-width: 500px) {
+    .login_div>h1{
+        font-size: 30px;
+    }
+    .login_component{
+        width: 250px;
+    }
+    .login_component>button,.googleButton{
+        width: 220px !important;
+    }
 }

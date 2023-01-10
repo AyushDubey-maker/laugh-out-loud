@@ -151,3 +151,52 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 }
+
+
+@media screen and (max-width: 800px) {
+    .meme-container-header{
+        top: 0px;
+    position: fixed;
+    }
+    .meme_box{
+        max-height: 400px;
+        max-width: 600px;
+    }
+    .meme_box>img{
+        max-height: 400px;
+        padding: 0px;
+    }
+    .meme-container-header-h>h1{
+        font-size: 35px;
+    }
+    .meme-container-header-b{
+        margin-top: 12px;
+    }
+    .meme-container-header-b>button{
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+}
+@media screen and (max-width: 500px) {
+.meme-container-header-h>h1{
+    font-size: 22px;
+    margin-left: 8px;
+}
+.meme-container-header-b>button{
+    font-size: 10px;
+}
+.meme_box>img{
+    max-width: 350px;
+}
+.prev_btn{
+    left: 40px;
+    top: 105%;
+}
+.next_btn{
+    right: 40px;
+    top: 105%;
+}
+.save_btn_grp{
+    margin-top: 80px;
+}
+}
