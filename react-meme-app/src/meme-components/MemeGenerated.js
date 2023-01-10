@@ -29,8 +29,13 @@ function MemeGenerated() {
   }, [authuser]);
   return (
     <div className="meme_generated_div">
-      <h1>Wonderful! You are a memer now</h1>
-      <div>
+      <div className="meme_generate_div_header">
+        <div className="meme_generate_div_header-h">
+      <h1>
+          Laugh Out Loud 😁
+        </h1>
+        </div>
+      <div className="meme_generate_div_header_b">
       <Button
         className="generate_btn"
         variant="contained"
@@ -39,9 +44,10 @@ function MemeGenerated() {
       >
         Make More Memes
       </Button>
-      <Button className="copy_url_btn" variant="outlined" onClick={copyLink}>
+      <Button className="copy_url_btn" variant="contained" color="primary" onClick={copyLink}>
         {copied ? "Link copied!" : "Copy link"} 💬
       </Button>
+      </div>
       </div>
       <div className="meme_box">{url && <img src={url} alt="" />}</div>
      <div className="meme_generated_footer">

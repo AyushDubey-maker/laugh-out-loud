@@ -93,8 +93,8 @@ function GenerateMeme() {
 
   return (
     <div className="generate_meme_div">
-      
-     
+      <div className="generate_meme_div_header">
+    
       <Button
         className="go_back_btn"
         variant="contained" color="primary"
@@ -103,7 +103,7 @@ function GenerateMeme() {
         <ArrowBackIcon/>
         Go Back Viewing Memes
       </Button>
-   
+      
       <div className="input_conatiner">
         {generatememes.length > 0 &&
           captions.map((c, index) => (
@@ -116,6 +116,7 @@ function GenerateMeme() {
       <Button className="generate_meme_btn" variant="contained" color="primary" onClick={generateMeme}>
         Generate your meme
       </Button>
+      </div>
       </div>
       <div className="meme_box">
       <p> {generatememes.length > 0 && generatememes[memeIndex].name}</p>
