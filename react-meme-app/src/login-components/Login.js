@@ -1,32 +1,50 @@
-import React from 'react'
-import { useHistory } from 'react-router'
-import { auth, provider } from '../firebase'
-import GoogleButton from 'react-google-button'
-import './Login.css'
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import { Button } from '@material-ui/core'
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { auth, provider } from '../firebase';
+import GoogleButton from 'react-google-button';
+import './Login.css';
+import { Button } from '@material-ui/core';
+import logo from '../assets/laugh-out-loud-logo.png'; // logo with text included
+
 function Login() {
-    const history=useHistory()
-    // Login through Google SignUp-->Firebase
-    const handleLogin=()=>{
-        auth.signInWithPopup(provider).then((result)=>{
-     
-        history.push('/')
-        }).catch((error)=>alert(error.message))
-    }
+    const history = useHistory();
+
+    const handleLogin = () => {
+        auth.signInWithPopup(provider)
+            .then(() => history.push('/'))
+            .catch((error) => alert(error.message));
+    };
+
     return (
-        <div className="login_div">
-            <h1>Laugh Out Loud 😁</h1>
-            {/* <img alt="" src="https://freepngimg.com/download/internet_meme/3-2-troll-face-meme-png.png"/> */}
-            <div className='login_component'>
-            <h2>Login User <PersonAddIcon fontSize="large"/></h2>
-            
-            <GoogleButton className='googleButton' onClick={handleLogin} style={{"marginLeft":"30px"}}>Sign-In With Google</GoogleButton>
-            <Button className="button" onClick={()=>history.push("/")} style={{"marginLeft":"30px"}} variant="contained" color="primary">Login Later</Button>
-           
+        <div className="login-container">
+            <div className="login-card">
+                <img
+                    src={logo}
+                    alt="Laugh Out Loud Logo"
+                    className="app-logo-only"
+                />
+
+                <p className="subtitle">
+                    Sign in to explore, react, and create hilarious memes.
+                </p>
+
+                <div className="login-content">
+                    <GoogleButton
+                        className="google-btn"
+                        onClick={handleLogin}
+                    />
+                    <Button
+                        onClick={() => history.push('/')}
+                        variant="contained"
+                        color="primary"
+                        className="later-btn"
+                    >
+                        Browse Without Signing In
+                    </Button>
+                </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Login
+export default Login;

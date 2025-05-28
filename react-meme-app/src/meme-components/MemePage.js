@@ -1,25 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useHistory } from "react-router";
 import { auth, db } from "../firebase";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import BookmarkBorderOutlinedIcon from "@material-ui/icons/BookmarkBorderOutlined";
-
+import BookmarkIcon from "@material-ui/icons/Bookmark";
 import "./MemePage.css";
 import firebase from "firebase";
 import { Button } from "@material-ui/core";
+import logo from "../assets/laugh-out-loud-logo.png";
+import img_not_found from '../assets/404_img_not_found.png';
 import Spinner from 'react-spinkit'
+
 function MemePage() {
   const [memes, setMemes] = useState([]);
   const [memeIndex, setMemeIndex] = useState(1);
   const [user, setUser] = useState(null);
+  const [savedMemes, setSavedMemes] = useState([]);
+  const [loadingNext, setLoadingNext] = useState(false);
+
+
   const history = useHistory();
 
   useEffect(() => {
     auth.onAuthStateChanged(async (authUser) => {
       if (authUser) {
         setUser(authUser);
-      }
+        db.collection("user-memes")
+      .doc(authUser.uid)
+      .collection("memes")
+      .get()
+      .then(snapshot => {
+        const savedUrls = snapshot.docs.map(doc => doc.data().memes.url);
+        setSavedMemes(savedUrls);
+      });
+        }
     });
 
     // eslint-disable-next-line
@@ -35,6 +50,8 @@ function MemePage() {
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(() => alert("Meme Saved"));
+        setSavedMemes(prev => [...prev, memes[memeIndex].url]);
+
     } else {
       history.push("/login");
     }
@@ -47,114 +64,139 @@ function MemePage() {
       array[j] = temp;
     }
   };
-
+    const fetchMemes = useCallback(async () => {
+      try {
+        const res = await fetch("https://meme-api.com/gimme/50");
+        const data = await res.json();
+        const _memes = data.memes;
+        shuffleMemes(_memes);
+        setMemes(prev => [...prev, ..._memes]);
+      } catch (err) {
+        alert("Failed to fetch memes: " + err.message);
+      }
+    }, []);
   // Fetching Random Memes through this api
-  useEffect(() => {
-    fetch("https://meme-api.com/gimme/50").then((res) => {
-      res
-        .json()
-        .then((res) => {
-          const _memes = res.memes;
-          shuffleMemes(_memes);
-          setMemes(_memes);
-        })
-        .catch((err) => alert(err.message));
-    });
-  }, []);
+      useEffect(() => {
+      fetchMemes();
+    }, [fetchMemes]);
+
+  const isSaved = memes.length > 0 && savedMemes.includes(memes[memeIndex]?.url);
+
 
   return (
     <div className="meme-container">
-      <div className="meme-container-header">
-        <div className="meme-container-header-h">
-        <h1>
-          Laugh Out Loud 😁{" "}
-        </h1>
-        </div>
-        <div className="meme-container-header-b">
-          {user && (
-            <Button
-              variant="outlined"
-              color="primary"
-              className="create_memes_btn"
-              onClick={() => history.push("/generate-meme")}
-            >
-              Welcome {user.displayName}, Create Your Own Memes 🖍
-            </Button>
-          )}
-        {user ? (
-          <Button
-            variant="contained"
-            color="secondary"
-            className="logout_btn"
-            onClick={() => auth.signOut().then(() => setUser(null))}
-          >
-          LOGOUT
-          </Button>
-        ) : (
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={() => history.push("/login")}
-          >
-            Login to Save Memes
-          </Button>
-        )}
-        </div>
-      </div>
-      <div className="meme_box">
-        {memes.length > 0 ? (
-          <img alt="meme" src={memes[memeIndex].url} />
-        ) : (
-          // <p>Oops Memes over..Now do some Work Don't waste time</p>
-          <div className="app_loading">
-            <div className="app_loading_container">
-              
-            <Spinner name="ball-spin-fade-loader" color="white" fadeIn="none"/>
+      <header className="meme-header">
+  <div className="header-left">
+    <img src={logo} alt="Laugh Out Loud Logo" className="meme-logo" />
+  </div>
+  <div className="header-right">
+    {user && (
+      <Button
+        variant="outlined"
+        color="primary"
+        className="header_button"
+        onClick={() => history.push("/generate-meme")}
+      >
+        Hi {user.displayName}, Create Memes 🖍
+      </Button>
+    )}
+    {user ? (
+      <Button
+        variant="contained"
+        color="secondary"
+        className="logout-btn"
+        onClick={() => auth.signOut().then(() => setUser(null))}
+      >
+        LOGOUT
+      </Button>
+    ) : (
+      <Button
+        variant="outlined"
+        color="primary"
+        onClick={() => history.push("/login")}
+      >
+        Login to Save Memes
+      </Button>
+    )}
+  </div>
+</header>
+
+      <div className="meme-box">
+            {memes.length === 0 ? (
+            <div className="app-loading">
+              <div className="app-loading-container">
+                <Spinner name="ball-spin-fade-loader" color="lightbrown" fadeIn="none" />
               </div>
-          </div>
-        )}
+            </div>
+          ) : (
+            <img
+              alt="meme"
+              src={memes[memeIndex]?.url}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = img_not_found;
+              }}
+            />
+          )}
 
         {memes.length > 0 && memeIndex > 0 && (
           <ArrowBackIcon
+            className="nav-btn prev"
             titleAccess="Previous Meme"
-            className="prev_btn"
             onClick={() => setMemeIndex(memeIndex - 1)}
-          >
-            Previous
-          </ArrowBackIcon>
+          />
         )}
-        {memes.length > 0 &&(
-        <ArrowForwardIcon
-          titleAccess="Next Meme"
-          className="next_btn"
-          onClick={() => setMemeIndex(memeIndex + 1)}
-        >
-          Next
-        </ArrowForwardIcon>
-        )}
-      </div>
-      <div className="save_btn_grp">
-        {user && memes.length > 0  &&(
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => saveMeme()}
-          >
-            Save Meme
-            <BookmarkBorderOutlinedIcon />
-          </Button>
-        )}
+        {memes.length > 0 && (
+          <ArrowForwardIcon
+            className={`nav-btn next ${loadingNext ? 'disabled' : ''}`}
+            titleAccess="Next Meme"
+            onClick={() => {
+              if (!loadingNext) {
+                setLoadingNext(true);
 
-        {user && memes.length > 0 &&(
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={() => history.push("/save")}
-          >
-            Lookout your Saved Memes
-          </Button>
+                setTimeout(() => {
+                  const nextIndex = memeIndex + 1;
+
+                  // If we're about to run out of memes
+                  if (nextIndex >= memes.length - 1) {
+                    fetchMemes();
+                  }
+
+                  setMemeIndex(nextIndex);
+                  setLoadingNext(false);
+                }, 300);
+              }
+            }}
+          />
         )}
       </div>
+
+      {user && memes.length > 0 && (
+        <div className="save-btn-group">
+          
+          <Button
+          className="save-meme-btn"
+          variant="contained"
+          color="primary"
+          onClick={saveMeme}
+          disabled={isSaved}
+        >
+          {isSaved ? (
+            <>
+              Saved <BookmarkIcon />
+            </>
+          ) : (
+            <>
+              Save Meme <BookmarkBorderOutlinedIcon />
+            </>
+          )}
+        </Button>
+        <Button className="view-save-meme-btn" variant="outlined" color="primary" onClick={() => history.push("/save")}>
+            View Saved Memes
+          </Button> 
+
+        </div>
+      )}
     </div>
   );
 }
