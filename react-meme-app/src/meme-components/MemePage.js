@@ -11,17 +11,19 @@ import { Button } from "@material-ui/core";
 import logo from "../assets/laugh-out-loud-logo.png";
 import img_not_found from '../assets/404_img_not_found.png';
 import Spinner from 'react-spinkit'
+import { useSwipeable } from 'react-swipeable';
+
 
 function MemePage() {
   const [memes, setMemes] = useState([]);
-  const [memeIndex, setMemeIndex] = useState(1);
+  const [memeIndex, setMemeIndex] = useState(0);
   const [user, setUser] = useState(null);
   const [savedMemes, setSavedMemes] = useState([]);
   const [loadingNext, setLoadingNext] = useState(false);
 
 
   const history = useHistory();
-
+  const DOTS_PER_PAGE = 10;
   useEffect(() => {
     auth.onAuthStateChanged(async (authUser) => {
       if (authUser) {
@@ -80,6 +82,46 @@ function MemePage() {
       fetchMemes();
     }, [fetchMemes]);
 
+  // For mobile screens swipeable feature
+      const swipeHandlers = useSwipeable({
+      onSwipedLeft: () => {
+        if (!loadingNext) {
+          const nextIndex = memeIndex + 1;
+          if (nextIndex >= memes.length - 1) fetchMemes();
+          setMemeIndex(nextIndex);
+        }
+      },
+      onSwipedRight: () => {
+        if (memeIndex > 0) {
+          setMemeIndex(memeIndex - 1);
+        }
+      },
+      preventScrollOnSwipe: true,
+      trackMouse: true,
+    });
+
+const goToNext = () => {
+  if (!loadingNext) {
+    setLoadingNext(true);
+    setTimeout(() => {
+      const nextIndex = memeIndex + 1;
+
+      if (nextIndex >= memes.length - 1) {
+        fetchMemes(); // Preload next batch
+      }
+
+      setMemeIndex(nextIndex);
+      setLoadingNext(false);
+    }, 300);
+  }
+};
+
+const goToPrev = () => {
+  const prevIndex = memeIndex - 1;
+  if (prevIndex >= 0) {
+    setMemeIndex(prevIndex);
+  }
+};
   const isSaved = memes.length > 0 && savedMemes.includes(memes[memeIndex]?.url);
 
 
@@ -121,7 +163,7 @@ function MemePage() {
   </div>
 </header>
 
-      <div className="meme-box">
+      <div className="meme-box" {...swipeHandlers}>
             {memes.length === 0 ? (
             <div className="app-loading">
               <div className="app-loading-container">
@@ -143,32 +185,41 @@ function MemePage() {
           <ArrowBackIcon
             className="nav-btn prev"
             titleAccess="Previous Meme"
-            onClick={() => setMemeIndex(memeIndex - 1)}
+            // onClick={() => setMemeIndex(memeIndex - 1)}
+            onClick={goToPrev}
+
           />
         )}
         {memes.length > 0 && (
           <ArrowForwardIcon
             className={`nav-btn next ${loadingNext ? 'disabled' : ''}`}
             titleAccess="Next Meme"
-            onClick={() => {
-              if (!loadingNext) {
-                setLoadingNext(true);
+   
+            onClick={goToNext}
 
-                setTimeout(() => {
-                  const nextIndex = memeIndex + 1;
-
-                  // If we're about to run out of memes
-                  if (nextIndex >= memes.length - 1) {
-                    fetchMemes();
-                  }
-
-                  setMemeIndex(nextIndex);
-                  setLoadingNext(false);
-                }, 300);
-              }
-            }}
           />
         )}
+      </div>
+
+        <div className="nav-dots">
+        {(() => {
+          const currentDotPage = Math.floor(memeIndex / DOTS_PER_PAGE);
+          return memes
+            .slice(
+              currentDotPage * DOTS_PER_PAGE,
+              (currentDotPage + 1) * DOTS_PER_PAGE
+            )
+            .map((_, i) => {
+              const absoluteIndex = currentDotPage * DOTS_PER_PAGE + i;
+              return (
+                <span
+                  key={i}
+                  className={`dot ${absoluteIndex === memeIndex ? "active" : ""}`}
+                  onClick={() => setMemeIndex(absoluteIndex)}
+                ></span>
+              );
+            });
+        })()}
       </div>
 
       {user && memes.length > 0 && (

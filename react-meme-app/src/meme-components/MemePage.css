@@ -129,7 +129,48 @@
 .app-loading-container {
   text-align: center;
 }
+.nav-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+}
 
+.nav-dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #c0c0c0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-dots .dot:hover {
+  background-color: #888;
+  transform: scale(1.2);
+}
+
+.nav-dots .dot.active {
+  background-color: #8C3B3B;
+  transform: scale(1.4);
+}
+
+@media screen and (max-width: 600px) {
+  .nav-dots {
+  margin-bottom: 0px;
+  }
+  .nav-dots .dot {
+    width: 12px;
+    height: 12px;
+  }
+
+  .nav-dots .dot.active {
+    transform: scale(1.2);
+  }
+}
 /* Responsive */
 @media screen and (max-width: 768px) {
   .meme-header {
@@ -165,6 +206,11 @@
     right: -40px;
   }
 }
+@media screen and (max-width: 600px) {
+  .nav-btn {
+    display: none !important;
+  }
+}
 
 @media screen and (max-width: 480px) {
 
@@ -187,7 +233,7 @@
   }
 
   .save-btn-group {
-    margin-top: 3.5rem;
+    margin-top: 2.5rem;
   }
 }
 
