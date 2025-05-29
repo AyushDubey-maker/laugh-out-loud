@@ -6,6 +6,7 @@ import "./Generate-Meme.css";
 import { Button } from "@material-ui/core";
 import { auth, db } from "../firebase";
 import firebase from "firebase";
+import logo from "../assets/laugh-out-loud-logo.png";
 function GenerateMeme() {
   const [generatememes, setGenerateMemes] = useState([]);
   const [memeIndex, setMemeIndex] = useState(0);
@@ -13,6 +14,7 @@ function GenerateMeme() {
  
   // UseEffect to check whether user is logged in or not..
   const [authuser, setUser] = useState(null);
+
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
@@ -92,17 +94,49 @@ function GenerateMeme() {
   }, [memeIndex, generatememes]);
 
   return (
-    <div className="generate_meme_div">
+   <div className='meme-container'>
+               <header className="meme-header">
+               <div className="header-left">
+                 <img src={logo} alt="Laugh Out Loud Logo" className="meme-logo" onClick={()=>history.push('/')}/>
+               </div>
+               <div className="header-right">
+                 {fire_user && (
+                 <div className="user-avatar" title={fire_user.displayName}>
+                   {fire_user.displayName?.[0].toUpperCase()}
+                 </div>
+               )}
+                 {fire_user && (
+                   <Button
+                     variant="outlined"
+                     color="primary"
+                     className="header_button"
+                     onClick={() => history.push("/generate-meme")}
+                   >
+                    Create Memes 🖍
+                   </Button>
+                 )}
+                 {fire_user ? (
+                   <Button
+                     variant="contained"
+                     color="secondary"
+                     className="logout-btn"
+                     onClick={() => auth.signOut().then(() => setUser(null))}
+                   >
+                     LOGOUT
+                   </Button>
+                 ) : (
+                   <Button
+                     variant="outlined"
+                     color="primary"
+                     className="header_button"
+                     onClick={() => history.push("/login")}
+                   >
+                     Login to Save Memes
+                   </Button>
+                 )}
+               </div>
+             </header>
       <div className="generate_meme_div_header">
-    
-      <Button
-        className="go_back_btn"
-        variant="contained" color="primary"
-        onClick={() => history.push("/")}
-      >
-        <ArrowBackIcon/>
-        Go Back Viewing Memes
-      </Button>
       
       <div className="input_conatiner">
         {generatememes.length > 0 &&
@@ -118,7 +152,7 @@ function GenerateMeme() {
       </Button>
       </div>
       </div>
-      <div className="meme_box">
+      <div className="meme-box">
       <p> {generatememes.length > 0 && generatememes[memeIndex].name}</p>
         {generatememes.length > 0 ? (
           <img
@@ -129,10 +163,10 @@ function GenerateMeme() {
         ) : (
           <p>Oops Memes over..Now do some Work Don't waste time</p>
         )}
-
+        <div className="arrow_box">
         {memeIndex > 0 && (
           <ArrowBackIcon
-            titleAccess="Previous Meme"
+            titleAccess="Previous Meme Template"
             className="prev_btn"
             onClick={() => setMemeIndex(memeIndex - 1)}
           >
@@ -140,12 +174,13 @@ function GenerateMeme() {
           </ArrowBackIcon>
         )}
         <ArrowForwardIcon
-          titleAccess="Next Meme"
+          titleAccess="Next Meme Template"
           className="next_btn"
           onClick={() => setMemeIndex(memeIndex + 1)}
         >
           Next
         </ArrowForwardIcon>
+        </div>
       </div>
      
     </div>

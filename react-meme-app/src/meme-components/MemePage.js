@@ -127,21 +127,26 @@ const goToPrev = () => {
 
   return (
     <div className="meme-container">
-      <header className="meme-header">
+  <header className="meme-header">
   <div className="header-left">
     <img src={logo} alt="Laugh Out Loud Logo" className="meme-logo" />
   </div>
   <div className="header-right">
-    {user && (
-      <Button
-        variant="outlined"
-        color="primary"
-        className="header_button"
-        onClick={() => history.push("/generate-meme")}
-      >
-        Hi {user.displayName}, Create Memes 🖍
-      </Button>
-    )}
+              {user && (
+                 <div className="user-avatar" title={user.displayName}>
+                   {user.displayName?.[0].toUpperCase()}
+                 </div>
+               )}
+                 {user && (
+                   <Button
+                     variant="outlined"
+                     color="primary"
+                     className="header_button"
+                     onClick={() => history.push("/generate-meme")}
+                   >
+                    Create Memes 🖍
+                   </Button>
+                 )}
     {user ? (
       <Button
         variant="contained"
@@ -155,6 +160,7 @@ const goToPrev = () => {
       <Button
         variant="outlined"
         color="primary"
+        className="header_button"
         onClick={() => history.push("/login")}
       >
         Login to Save Memes

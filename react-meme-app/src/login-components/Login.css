@@ -58,20 +58,18 @@
   margin-bottom: 0.5rem;
 }
 
-.google-btn .google-button {
+.google-btn {
   width: 100% !important;
 }
 
 .later-btn {
-  background-color: var(--accent);
-  color: var(--text-on-accent);
+  background-color: #8C3B3B !important;
+  color: white !important;
   width: 100%;
   font-weight: 500;
   text-transform: none !important;
 }
-.later-btn:hover {
-  background-color: var(--accent-dark);
-}
+
 
 @media (max-width: 480px) {
   .app-title {
@@ -89,3 +87,6 @@
 
 
 }
+
+
+

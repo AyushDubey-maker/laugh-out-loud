@@ -5,8 +5,8 @@ import './SaveList.css'
 import firebase from 'firebase'
 import { useHistory } from 'react-router';
 import { Button } from '@material-ui/core';
-import { ArrowBackIos } from '@material-ui/icons';
-import Spinner from 'react-spinkit'
+import Spinner from 'react-spinkit';
+import logo from "../assets/laugh-out-loud-logo.png";
 function SaveList() {
   
     const [savelist,setSavelist]=useState([])
@@ -58,14 +58,48 @@ function SaveList() {
    
     
     return (
-        <div className='saveList'>
-          <div className="saveList_header">
-          <Button variant="contained" color="primary" onClick={()=>history.push('/')}><ArrowBackIos className='back_icon'/>Home</Button>
-            {/* <ArrowBackIos className='back_icon' onClick={()=>history.push('/')}/> */}
-          <h1 className="saveList_header-h">Your Saved Memes</h1>
-          {/* <img className='meme_header_img' alt="" src="https://freepngimg.com/download/internet_meme/3-2-troll-face-meme-png.png"/> */}
-            <h1 className="saveList_header-t">😁</h1>
-           </div>
+        <div className='meme-container'>
+            <header className="meme-header">
+            <div className="header-left">
+              <img src={logo} alt="Laugh Out Loud Logo" className="meme-logo" onClick={()=>history.push('/')}/>
+            </div>
+            <div className="header-right">
+              {user && (
+              <div className="user-avatar" title={user.displayName}>
+                {user.displayName?.[0].toUpperCase()}
+              </div>
+            )}
+              {user && (
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  className="header_button"
+                  onClick={() => history.push("/generate-meme")}
+                >
+                 Create Memes 🖍
+                </Button>
+              )}
+              {user ? (
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  className="logout-btn"
+                  onClick={() => auth.signOut().then(() => setUser(null))}
+                >
+                  LOGOUT
+                </Button>
+              ) : (
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  className="header_button"
+                  onClick={() => history.push("/login")}
+                >
+                  Login to Save Memes
+                </Button>
+              )}
+            </div>
+          </header>
             {savelist.length > 0 ? (
           <div className="movie-grid">
             {savelist.map(meme => (
@@ -84,7 +118,7 @@ function SaveList() {
         {/* If User Has No Memes */}
         {haveMemes===false &&(
            <div className="no-memes-div">
-            <h2 className="no-memes">No memes saved!</h2>
+            <h2 className="no-memes">No memes saved! <a href='/'>Add some</a></h2>
            </div>
         )}
         </div>

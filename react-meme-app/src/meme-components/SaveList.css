@@ -57,6 +57,9 @@
    color: gray;
    font-weight: 300;
  }
+ .no-memes>a{
+   text-decoration: none;
+ }
  .no-memes-div>button{
    padding: 12px;
    text-transform: inherit !important;

@@ -25,14 +25,16 @@ function Login() {
                 />
 
                 <p className="subtitle">
-                    Sign in to explore, react, and create hilarious memes.
+                    Sign in to explore, save, and create hilarious memes.
                 </p>
 
                 <div className="login-content">
+                   
                     <GoogleButton
                         className="google-btn"
                         onClick={handleLogin}
                     />
+                    
                     <Button
                         onClick={() => history.push('/')}
                         variant="contained"
