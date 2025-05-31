@@ -30,8 +30,16 @@
 }
 
 .buttons_d{
+    display: flex;
     margin-top:10px;
 }
 .buttons_d>button{
     margin-right:8px;
+    font-size: 10px;
+}
+
+@media screen and (max-width: 600px) {
+.meme_card>img{
+    height: 245px;
+}
 }

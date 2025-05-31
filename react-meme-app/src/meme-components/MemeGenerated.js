@@ -4,6 +4,8 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useClipboard } from "use-clipboard-copy";
 import { Button } from "@material-ui/core";
 import { auth } from "../firebase";
+import firebase from 'firebase';
+import logo from "../assets/laugh-out-loud-logo.png";
 function MemeGenerated() {
   const [copied, setCopied] = useState(false);
   const clipboard = useClipboard();
@@ -27,40 +29,74 @@ function MemeGenerated() {
     });
     // eslint-disable-next-line
   }, [authuser]);
+  const user=firebase.auth().currentUser;
   return (
-    <div className="meme_generated_div">
-      <div className="meme_generate_div_header">
-        <div className="meme_generate_div_header-h">
-      <h1>
-          Laugh Out Loud 😁
-        </h1>
-        </div>
-      <div className="meme_generate_div_header_b">
-      <Button
-        className="generate_btn"
-        variant="contained"
-        color="primary"
-        onClick={() => history.push("/generate-meme")}
-      >
-        Make More Memes
-      </Button>
-      <Button className="copy_url_btn" variant="contained" color="primary" onClick={copyLink}>
-        {copied ? "Link copied!" : "Copy link"} 💬
-      </Button>
+    <div className="meme-container">
+      <header className="meme-header">
+      <div className="header-left">
+        <img src={logo} alt="Laugh Out Loud Logo" className="meme-logo" />
       </div>
+      <div className="header-right">
+                  {user && (
+                     <div className="user-avatar" title={user.displayName}>
+                       {user.displayName?.[0].toUpperCase()}
+                     </div>
+                   )}
+                     {user && (
+                      
+                       <Button
+                         variant="outlined"
+                         color="primary"
+                         className="header_button"
+                         onClick={() => history.push("/generate-meme")}
+                       >
+                        Make More Memes 🖍
+                       </Button>
+                     
+                     )}
+        {user ? (
+          <Button
+            variant="contained"
+            color="secondary"
+            className="logout-btn"
+            onClick={() => auth.signOut().then(() => setUser(null))}
+          >
+            LOGOUT
+          </Button>
+        ) : (
+          <Button
+            variant="outlined"
+            color="primary"
+            className="header_button"
+            onClick={() => history.push("/login")}
+          >
+            Login to Save Memes
+          </Button>
+        )}
+     
       </div>
-      <div className="meme_box">{url && <img src={url} alt="" />}</div>
+    </header>
+     
+     <div className="meme-box meme-generated-box">{url && <img src={url} alt="" />}</div>
      <div className="meme_generated_footer">
       <p>
         Your meme is saved in your savelist{" "}
+      </p>
+        <div className="save-btn-group meme-generated-save-btn-grp">
+        <Button className="copy_url_btn" variant="contained" color="primary" onClick={copyLink}>
+        {copied ? "Link copied!" : "Copy link"} 📋
+        </Button>
+        {" "}
         <Button
           variant="contained"
           color="primary"
+          className="checkout_url"
           onClick={() => history.push("/save")}
         >
           Checkout
         </Button>
-      </p>
+        </div>
+      
       </div>
     </div>
   );

@@ -101,7 +101,7 @@ function SaveList() {
             </div>
           </header>
             {savelist.length > 0 ? (
-          <div className="movie-grid">
+          <div className="meme-grid">
             {savelist.map(meme => (
               <MemeCard meme={meme} key={meme.id} id={meme.id} type="savelist" />
             ))}

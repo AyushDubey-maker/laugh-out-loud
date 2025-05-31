@@ -1,64 +1,13 @@
-.meme_generated_div{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden !important;
-    height: 100%;
-}
-.meme_generated_div::before{
-content: "";
-position: absolute;
-top: 0px;
-left: 0px;
-right: 0px;
-bottom: 0px;
-background: url('../assets/background-img.png');
-background-repeat: no-repeat;
-background-size: cover;
-z-index: -1;
-}
-.meme_generate_div_header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
-    text-align: center;
-}
-.meme_generate_div_header-h{
-    flex: 0.6;
-    text-align: start;
-}
-.meme_generate_div_header-h>h1{
- 
-    color: #edf4fb;
-    font-weight: 300 !important;
-  
-    font-size: 50px;
-    padding-left: 5%;
-}
-.meme_generate_div_header_b{
-    flex: 0.4;
-    margin: auto;
+
+.meme-generated-box{
+    margin-bottom: 0 !important;
 }
 
-.meme_generate_div_header_b>button{
-margin-right: 2%;
+.meme-generated-save-btn-grp{
+    margin-top: 0 !important;
 }
 
-.meme_generated_div>h1{
-    /* font-family: Arial, Helvetica, sans-serif; */
-    padding: 0 !important;
-    margin-top: 5px !important;
-    margin-bottom: 3px !important;
-    font-weight: 400;
-}
-
-.meme_generated_footer{
-    margin-bottom: 10px;
-}
-.meme_generated_footer>p{
-    /* font-family: 'Times New Roman', Times, serif; */
-    color: #edf4fb;
-    font-weight: 300 !important;
+.copy_url_btn,.checkout_url{
+    color: white !important;
+    background-color: #8C3B3B !important;
 }
