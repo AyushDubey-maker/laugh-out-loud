@@ -86,3 +86,42 @@ p{
     font-size: 35px !important;
     cursor: pointer;
 }
+
+
+.example-preview {
+  text-align: center;
+}
+
+.example-img {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+}
+
+.meme-box-container{
+    display: flex;
+    gap: 10px;
+}
+
+.meme-box-preview{
+    max-width: 200px;
+    max-height: fit-content;
+    background: white;
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.example-preview>p{
+    margin-top: 0px;
+}
+@media screen and (max-width: 600px) {
+.meme-box-container{
+ flex-direction: column;
+}
+.meme-box-preview{
+    margin: auto;
+}
+}

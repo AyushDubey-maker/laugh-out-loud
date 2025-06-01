@@ -15,9 +15,19 @@ function MemeCard({meme,type,id}) {
     setCopied(true);
   };
     const user=firebase.auth().currentUser;
-    function deleteMeme(){
-      db.collection('user-memes').doc(user?.uid).collection('memes').doc(id).delete()
-    }
+    function deleteMeme() {
+  db.collection("user-memes")
+    .doc(user?.uid)
+    .collection("memes")
+    .doc(id)
+    .delete()
+    .then(() => {
+      //console.log(`Deleted meme with id ${id}`);
+    })
+    .catch((error) => {
+      console.error("Error deleting meme:", error);
+    });
+}
     return (
         <div >
                {type === "savelist" && (

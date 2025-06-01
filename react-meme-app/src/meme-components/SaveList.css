@@ -85,7 +85,9 @@
   .meme-grid {
     grid-template-columns: 1fr; /* stack items vertically */
   }
-  
+   .no-memes-div>h2{
+    font-size: 20px;
+   }
 }
 
 @media (min-width: 601px) and (max-width: 1030px) {
