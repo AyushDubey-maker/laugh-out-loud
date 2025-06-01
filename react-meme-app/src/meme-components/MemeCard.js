@@ -11,12 +11,12 @@ function MemeCard({meme,type,id}) {
   const clipboard = useClipboard();
   const copyLink = () => {
 
-    clipboard.copy( meme.data.memes.data.url);
+    clipboard.copy( meme.data.memes.url);
     setCopied(true);
   };
     const user=firebase.auth().currentUser;
     function deleteMeme(){
-      db.collection('user-memes').doc(user?.uid).collection('memes').doc(meme.id).delete()
+      db.collection('user-memes').doc(user?.uid).collection('memes').doc(id).delete()
     }
     return (
         <div >

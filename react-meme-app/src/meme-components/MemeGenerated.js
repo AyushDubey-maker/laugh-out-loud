@@ -93,7 +93,7 @@ function MemeGenerated() {
           className="checkout_url"
           onClick={() => history.push("/save")}
         >
-          Checkout
+          View SaveList
         </Button>
         </div>
       

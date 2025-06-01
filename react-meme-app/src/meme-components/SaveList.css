@@ -1,9 +1,12 @@
 .meme-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-    max-width: 1200px;
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
   .saveList_header{
     display: flex;
     justify-content: center;
@@ -30,16 +33,16 @@
     margin-bottom: 10px;
   }
   @media screen and (max-width: 1200px) {
-    .meme-grid {
+    /* .meme-grid {
       grid-template-columns: repeat(2, 1fr);
-    }
+    } */
  
   }
   @media screen and (max-width: 900px) {
-    .meme-grid {
+    /* .meme-grid {
       grid-template-columns: repeat(1, 1fr);
       margin-left: 40px;
-    }
+    } */
  
   }
  .no-memes-div{
@@ -72,7 +75,27 @@
   .saveList_header-t{
    font-size: 30px;
   }
-  .meme-grid{
+  /* .meme-grid{
     margin-left: 0px;
+  } */
+}
+
+/* Optional: tweak column size for very small screens */
+@media (max-width: 600px) {
+  .meme-grid {
+    grid-template-columns: 1fr; /* stack items vertically */
+  }
+  
+}
+
+@media (min-width: 601px) and (max-width: 1030px) {
+  .meme-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2-column grid */
+  }
+}
+
+@media (min-width: 1030px) {
+  .meme-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3-column grid for desktop */
   }
 }

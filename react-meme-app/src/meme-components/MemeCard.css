@@ -27,6 +27,8 @@
 
 .meme_card>img{
     height: 300px;
+    max-width: 300px;
+    object-fit: contain;
 }
 
 .buttons_d{
@@ -41,5 +43,6 @@
 @media screen and (max-width: 600px) {
 .meme_card>img{
     height: 245px;
+    max-width: 250px;
 }
 }

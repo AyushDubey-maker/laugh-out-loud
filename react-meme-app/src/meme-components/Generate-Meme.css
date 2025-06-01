@@ -50,10 +50,11 @@ p{
 
 .input_conatiner{
     margin-top: 20px;
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
     align-items: center;
     margin-bottom: 3%;
+    margin-left: 30%;
    
 }
 .input_conatiner>input{
