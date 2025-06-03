@@ -18,6 +18,8 @@
 .generate_meme_div_header{
     width: 100%;
     margin-top: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 .meme-box{
@@ -50,17 +52,92 @@ p{
 
 .input_conatiner{
     margin-top: 20px;
-    /* display: flex;
-    justify-content: center; */
     align-items: center;
     margin-bottom: 3%;
-    margin-left: 30%;
    
 }
 .input_conatiner>input{
   padding: 10px;
   margin-right: 6px;
  }
+
+ .template_preview_spinner{
+    margin: auto;
+ }
+
+ .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  position: relative;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
+}
+
+.modal-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.3);
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .modal-content {
+    width: 90%;
+    padding: 0.75rem;
+    border-radius: 10px;
+  }
+
+  .modal-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+
+  .close-btn {
+    top: 6px;
+    right: 10px;
+    font-size: 20px;
+  }
+
+  .example-preview p {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .meme-box-preview {
+    padding: 0.5rem;
+  }
+
+  .meme-container {
+    padding: 0 1rem;
+  }
+}
 
  @media screen and (max-width: 600px) {
 .input_conatiner{
@@ -98,6 +175,7 @@ p{
   height: auto;
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
 }
 
 .meme-box-container{
@@ -116,6 +194,7 @@ p{
 
 .example-preview>p{
     margin-top: 0px;
+    font-size: 18px;
 }
 @media screen and (max-width: 600px) {
 .meme-box-container{
@@ -123,5 +202,12 @@ p{
 }
 .meme-box-preview{
     margin: auto;
+}
+.generate_meme_div_header{
+    display: block !important;
+    
+}
+.input_conatiner{
+    margin-left: 23%;
 }
 }

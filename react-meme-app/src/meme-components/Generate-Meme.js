@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
@@ -8,6 +8,7 @@ import { auth, db } from "../firebase";
 import firebase from "firebase";
 import Spinner from 'react-spinkit';
 import logo from "../assets/laugh-out-loud-logo.png";
+import img_not_found from '../assets/404_img_not_found.png';
 
 function GenerateMeme() {
   const [generatememes, setGenerateMemes] = useState([]);
@@ -15,6 +16,15 @@ function GenerateMeme() {
   const [captions, setCaptions] = useState([]);
   const [authUser, setUser] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [memeLoaded, setMemeLoaded] = useState(false);
+  const [previewLoaded, setPreviewLoaded] = useState(false);
+  const [memeError, setMemeError] = useState(false);
+  const [previewError, setPreviewError] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const memeLoadedRef = useRef(false);
+  const previewLoadedRef = useRef(false);
+
   const history = useHistory();
   const fire_user = firebase.auth().currentUser;
 
@@ -44,7 +54,7 @@ function GenerateMeme() {
     fetch("https://api.memegen.link/templates")
       .then((res) => res.json())
       .then((data) => {
-      
+        console.log(data)
         setGenerateMemes(shuffleArray(data));
       })
       .catch((err) => console.error("Failed to fetch templates", err));
@@ -65,16 +75,29 @@ useEffect(() => {
 }, [memeIndex, generatememes]);
   //  Construct meme URL
 
-  function buildMemeUrl(template) {
-  const safe = (str) =>
-    encodeURIComponent(str || "_").replace(/-/g, "--").replace(/_/g, "__");
+    function buildMemeUrl(template) {
+      if (!template || !template.id) return ""; // prevent crash
+      const safe = (str) =>
+        encodeURIComponent(str || "_").replace(/-/g, "--").replace(/_/g, "__");
+      const captionPath = captions.map((caption) => safe(caption)).join("/");
+      return `https://api.memegen.link/images/${template.id}/${captionPath}.png`;
+    }
+  // Image Loading
+  useEffect(() => {
+    setMemeLoaded(false);
+    setPreviewLoaded(false);
+    setMemeError(false);
+    setPreviewError(false);
+    memeLoadedRef.current = false;
+    previewLoadedRef.current = false;
 
-  const captionPath = captions
-    .map((caption) => safe(caption))
-    .join("/");
+    const timeout = setTimeout(() => {
+      if (!memeLoadedRef.current) setMemeError(true);
+      if (!previewLoadedRef.current) setPreviewError(true);
+    }, 20000); // 20 seconds
 
-  return `https://api.memegen.link/images/${template.id}/${captionPath}.png`;
-}
+    return () => clearTimeout(timeout);
+  }, [memeIndex]);
 
   //  Save to Firestore
   function saveMeme() {
@@ -96,6 +119,14 @@ useEffect(() => {
         alert("Failed to generate meme. Try again.");
       })
       .finally(() => setIsSaving(false)); 
+  }
+
+  function openModal() {
+    setIsModalOpen(true);
+  }
+
+  function closeModal() {
+    setIsModalOpen(false);
   }
 
   return (
@@ -167,7 +198,7 @@ useEffect(() => {
           {isSaving ? (
             <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span>Generating...</span>
-              <Spinner name="circle" color="white" fadeIn="none" />
+              <Spinner name="circle" color="lightbrown" fadeIn="none" />
             </span>
           ) : (
             "Generate Meme"
@@ -176,52 +207,95 @@ useEffect(() => {
         </div>
       </div>
       <div className="meme-box-container">
-      <div className="meme-box-preview">
+     
         {generatememes[memeIndex]?.example?.url && (
-          <div className="example-preview">
-            <p><strong>Example Meme:</strong></p>
+          <div className="meme-box-preview example-preview">
+            <p>Template Preview:</p>
+
+            {!previewLoaded && !previewError && (
+              <Spinner className="template_preview_spinner" name="circle" color="lightbrown" fadeIn="none" />
+            )}
+
             <img
-                key={generatememes[memeIndex].id + "-example"} 
-                className="example-img"
-                src={generatememes[memeIndex].example.url}
-                alt="Example Meme"
-              style={{ maxWidth: "100%", border: "1px solid #ccc", borderRadius: "8px", marginTop: "4px" }}
+              key={generatememes[memeIndex]?.id + "-example"}
+              className="example-img"
+              src={previewError ? img_not_found : generatememes[memeIndex]?.example.url}
+              alt="Template Preview"
+              onLoad={() => {
+                setPreviewLoaded(true);
+                previewLoadedRef.current = true;
+              }}
+              onError={() => setPreviewError(true)}
+              style={{ display: previewLoaded || previewError ? "block" : "none" }}
+              onClick={openModal}
             />
+            {isModalOpen && (
+              <div className="modal-overlay" onClick={closeModal}>
+                <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                  <img
+                    src={previewError ? img_not_found : generatememes[memeIndex]?.example.url}
+                    alt="Modal Template Preview"
+                  />
+                  <button className="close-btn" onClick={closeModal}>×</button>
+                </div>
+              </div>
+            )}
           </div>
         )}
-        </div>
+        
+ 
       <div className="meme-box">
-        <p>{generatememes.length > 0 && generatememes[memeIndex].name}</p>
-        {generatememes.length > 0 && generatememes[memeIndex] ? (
-            <img
-              key={generatememes[memeIndex].id} 
-              className="meme_img"
-              alt="meme"
-              src={buildMemeUrl(generatememes[memeIndex])}
-            />
-          ) : (
-            <p>Oops! No memes loaded.</p>
-          )}
-  
+        <p>{generatememes[memeIndex]?.name}</p>
 
-        <div className="arrow_box">
+        {generatememes.length > 0 && generatememes[memeIndex] && !memeError && (
+          <img
+            key={generatememes[memeIndex].id}
+            className="meme_img"
+            alt="Generated Meme"
+            src={buildMemeUrl(generatememes[memeIndex])}
+            onLoad={() => {
+              setMemeLoaded(true);
+              memeLoadedRef.current = true;
+            }}
+            onError={() => setMemeError(true)}
+            style={{ display: memeLoaded ? "block" : "none" }}
+          />
+        )}
+        {memeError && (
+          <img
+            src={img_not_found}
+            alt="Meme Not Found"
+            className="meme_img"
+            style={{ display: "block" }}
+          />
+        )}
+        {!memeLoaded && !memeError && (
+          <Spinner name="circle" color="white" fadeIn="none" />
+        )}
+      </div>
+      </div>
+      <div className="arrow_box">
           {memeIndex > 0 && (
+            <Button  onClick={() => {setMemeIndex(memeIndex - 1)}}>
             <ArrowBackIcon
               titleAccess="Previous Meme Template"
               className="prev_btn"
-               onClick={() => {setMemeIndex(memeIndex - 1)}}
+              
              
             />
+              Prev
+            </Button>
           )}
+          <Button  onClick={() => {setMemeIndex(memeIndex + 1)}}>
+            Next
           <ArrowForwardIcon
             titleAccess="Next Meme Template"
             className="next_btn"
-            onClick={() => {setMemeIndex(memeIndex + 1)}}
+           
         
           />
+          </Button>
         </div>
-      </div>
-      </div>
     </div>
   );
 }
