@@ -54,7 +54,6 @@ function GenerateMeme() {
     fetch("https://api.memegen.link/templates")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         setGenerateMemes(shuffleArray(data));
       })
       .catch((err) => console.error("Failed to fetch templates", err));
@@ -210,7 +209,7 @@ useEffect(() => {
      
         {generatememes[memeIndex]?.example?.url && (
           <div className="meme-box-preview example-preview">
-            <p>Template Preview:</p>
+            <p className="example-preview-title">Template Preview:</p>
 
             {!previewLoaded && !previewError && (
               <Spinner className="template_preview_spinner" name="circle" color="lightbrown" fadeIn="none" />
@@ -229,6 +228,18 @@ useEffect(() => {
               style={{ display: previewLoaded || previewError ? "block" : "none" }}
               onClick={openModal}
             />
+            {generatememes[memeIndex]?.source && (
+              <p className="meme-source">
+                Learn more:{" "}
+                <a
+                  href={generatememes[memeIndex].source}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Origin of this meme
+                </a>
+              </p>
+            )}
             {isModalOpen && (
               <div className="modal-overlay" onClick={closeModal}>
                 <div className="modal-content" onClick={(e) => e.stopPropagation()}>

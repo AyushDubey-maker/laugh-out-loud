@@ -220,6 +220,7 @@
 
   .meme-box {
     padding: 0.5rem;
+    min-height: fit-content;
   }
 
   .prev {

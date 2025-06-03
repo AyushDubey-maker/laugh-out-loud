@@ -168,8 +168,8 @@ const goToPrev = () => {
     )}
   </div>
 </header>
-
-      <div className="meme-box" {...swipeHandlers}>
+ 
+<div className="meme-box" {...swipeHandlers}>
             {memes.length === 0 ? (
             <div className="app-loading">
               <div className="app-loading-container">
@@ -205,7 +205,7 @@ const goToPrev = () => {
 
           />
         )}
-      </div>
+        </div>
 
         <div className="nav-dots">
         {(() => {

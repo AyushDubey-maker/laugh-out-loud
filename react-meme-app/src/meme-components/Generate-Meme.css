@@ -105,7 +105,21 @@ p{
   color: #333;
   cursor: pointer;
 }
+.meme-source {
+  margin-top: 0.5rem;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 0px;
+}
 
+.meme-source a {
+  color: #1a73e8;
+  text-decoration: underline;
+}
+
+.meme-source a:hover {
+  text-decoration: none;
+}
 @media only screen and (max-width: 600px) {
   .modal-content {
     width: 90%;
@@ -125,7 +139,7 @@ p{
     font-size: 20px;
   }
 
-  .example-preview p {
+  .example-preview-title{
     font-size: 14px;
     margin-bottom: 6px;
   }
@@ -165,7 +179,7 @@ p{
 }
 
 
-.example-preview {
+.example-preview-title{
   text-align: center;
 }
 
@@ -192,7 +206,7 @@ p{
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
 
-.example-preview>p{
+.example-preview-title{
     margin-top: 0px;
     font-size: 18px;
 }
