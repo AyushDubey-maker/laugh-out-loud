@@ -199,7 +199,7 @@ p{
 }
 
 .meme-box-preview{
-    max-width: 200px;
+    max-width: 250px;
     max-height: fit-content;
     background: white;
     border-radius: 16px;
@@ -225,4 +225,15 @@ p{
 .input_conatiner{
     margin-left: 23%;
 }
+}
+
+@media screen and (max-width: 480px) {
+.generate-meme-box{
+  margin-top: 0 !important;
+  max-width: 355px;
+}
+.arrow_box{
+  margin-bottom: 4%;
+}
+
 }

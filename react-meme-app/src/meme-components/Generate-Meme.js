@@ -152,7 +152,7 @@ useEffect(() => {
               className="header_button"
               onClick={() => history.push("/generate-meme")}
             >
-              Create Memes 🖍
+              Create Memes <ArrowForwardIcon className="tilted-icon"/>
             </Button>
           )}
           {fire_user ? (
@@ -190,7 +190,7 @@ useEffect(() => {
           <Button
           className="generate_meme_btn"
           variant="contained"
-          color="primary"
+          color="secondary"
           onClick={saveMeme}
           disabled={isSaving}
         >
@@ -255,7 +255,7 @@ useEffect(() => {
         )}
         
  
-      <div className="meme-box">
+      <div className="meme-box generate-meme-box">
         <p>{generatememes[memeIndex]?.name}</p>
 
         {generatememes.length > 0 && generatememes[memeIndex] && !memeError && (

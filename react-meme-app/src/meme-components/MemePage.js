@@ -124,7 +124,6 @@ const goToPrev = () => {
 };
   const isSaved = memes.length > 0 && savedMemes.includes(memes[memeIndex]?.url);
 
-
   return (
     <div className="meme-container">
   <header className="meme-header">
@@ -144,7 +143,7 @@ const goToPrev = () => {
                      className="header_button"
                      onClick={() => history.push("/generate-meme")}
                    >
-                    Create Memes 🖍
+                    Create Memes <ArrowForwardIcon className="tilted-icon"/>
                    </Button>
                  )}
     {user ? (
@@ -205,8 +204,6 @@ const goToPrev = () => {
 
           />
         )}
-        </div>
-
         <div className="nav-dots">
         {(() => {
           const currentDotPage = Math.floor(memeIndex / DOTS_PER_PAGE);
@@ -227,7 +224,6 @@ const goToPrev = () => {
             });
         })()}
       </div>
-
       {user && memes.length > 0 && (
         <div className="save-btn-group">
           
@@ -254,6 +250,14 @@ const goToPrev = () => {
 
         </div>
       )}
+        </div>
+
+      {/* <div className="protip-banner">
+        <div className="protip-icon">💡</div>
+        <div className="protip-text">
+          <strong>Pro Tip:</strong> Click <span className="highlight">"Create Memes"</span> to customize your own meme using any template!
+        </div>
+      </div> */}
     </div>
   );
 }
