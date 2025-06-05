@@ -23,11 +23,12 @@
 }
 
 .meme-box{
-    /* margin-top: 10px; */
+
     flex-direction: column;
     margin-bottom: 4%;
 }
 .meme-box>p{
+    margin: 0;
     color: #8C3B3B;
 
 }

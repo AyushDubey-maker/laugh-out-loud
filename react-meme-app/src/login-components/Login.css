@@ -7,11 +7,25 @@
 .login-container {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background: url('../assets/background-img.png') no-repeat center center/cover;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 1rem;
+}
+
+.login-container-div{
+      display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-container-div-title{
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 15%;
+
 }
 
 .login-card {
@@ -21,17 +35,23 @@
   max-width: 400px;
   width: 100%;
   padding: 2rem;
-  text-align: center;
+
   backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .app-logo-only {
   width: 160px;
   height: auto;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 
-
+.laughing_man_logo{
+    width: 115px;
+    height: auto;
+}
 .app-title {
   font-size: 28px;
   font-weight: 700;
@@ -70,6 +90,35 @@
   text-transform: none !important;
 }
 
+.tips-container {
+  margin-top: 20px;
+  padding: 16px;
+  background-color: #fff8e1; /* light yellow tone */
+  border: 1px solid #ffecb3;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.tips-heading {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  margin-top: 0;
+  color: #ff9800;
+}
+
+.tips-list {
+  list-style-type: "💡 ";
+  padding-left: 1.2rem;
+  margin: 0;
+}
+
+.tips-list li {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  color: #444;
+}
+
 
 @media (max-width: 480px) {
   .app-title {
@@ -77,6 +126,7 @@
   }
 
   .login-card {
+    max-width: 300px;
     padding: 1.5rem;
   }
 
