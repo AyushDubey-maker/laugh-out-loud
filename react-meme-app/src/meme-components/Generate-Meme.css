@@ -167,6 +167,7 @@ p{
     width: 100%;
     display: flex;
     justify-content: space-evenly;
+    margin-top: 2%;
     
 }
 .arrow_box>.prev_btn{
