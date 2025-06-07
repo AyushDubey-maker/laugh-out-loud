@@ -89,7 +89,7 @@ REACT_APP_HUGGINGFACE_API_KEY=your_hf_token
 ## Live Demo
 
 Access the application here:  
-[https://laugh-out-loud.vercel.app](https://laugh-out-loud.vercel.app)
+[https://laugh-out-loud-fawn.vercel.app/](https://laugh-out-loud-fawn.vercel.app/)
 
 ---
 
