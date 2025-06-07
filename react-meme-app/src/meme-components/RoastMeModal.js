@@ -147,6 +147,7 @@ Bot:
       ...prev,
       { type: "bot", text: "Oops, I forgot how to roast. Try again later." }
     ]);
+    setInput("");
   }
 
   setLoading(false);
