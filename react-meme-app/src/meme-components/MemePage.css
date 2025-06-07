@@ -247,61 +247,11 @@
     right: 20px;
   }
 }
-/* @media screen and (min-width: 600px) {
+@media screen and (min-width: 361px) and (max-width: 380px){
 .roast-me-float {
-  position: fixed;
-  bottom: 80px;
-  right: 40px;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 999;
-  transition: transform 0.2s ease;
-}
-
-.roast-me-float:hover {
-  transform: scale(1.05);
-}
-
-.roast-me-image {
-  width:  70%;
-  height: 70%;
-  object-fit: contain;
+  top: 24%;
 }
 }
-
-@media screen and (max-width: 600px) {
-  .roast-me-float {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 999;
-  transition: transform 0.2s ease;
-  margin-bottom: 20px;
-}
-
-.roast-me-float:hover {
-  transform: scale(1.05);
-}
-
-.roast-me-image {
-  width:  70%;
-  height: 70%;
-  object-fit: contain;
-}
-} */
 @media screen and (max-width: 600px) {
   .nav-dots {
   margin-bottom: 0px;
