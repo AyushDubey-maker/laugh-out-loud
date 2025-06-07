@@ -8,10 +8,13 @@ import BookmarkIcon from "@material-ui/icons/Bookmark";
 import "./MemePage.css";
 import firebase from "firebase";
 import { Button } from "@material-ui/core";
+import Tooltip from "@material-ui/core/Tooltip";
 import logo from "../assets/laugh-out-loud-logo.png";
 import img_not_found from '../assets/404_img_not_found.png';
+import roast_me_icon from '../assets/roast-me-icon.png'
 import Spinner from 'react-spinkit'
 import { useSwipeable } from 'react-swipeable';
+import RoastMeModal from "./RoastMeModal";
 
 
 function MemePage() {
@@ -20,6 +23,7 @@ function MemePage() {
   const [user, setUser] = useState(null);
   const [savedMemes, setSavedMemes] = useState([]);
   const [loadingNext, setLoadingNext] = useState(false);
+  const [showRoastModal, setShowRoastModal] = useState(false);
 
 
   const history = useHistory();
@@ -167,7 +171,7 @@ const goToPrev = () => {
     )}
   </div>
 </header>
- 
+
 <div className="meme-box" {...swipeHandlers}>
             {memes.length === 0 ? (
             <div className="app-loading">
@@ -251,13 +255,16 @@ const goToPrev = () => {
         </div>
       )}
         </div>
+       
+       
+      <Tooltip title="Let AI roast you a bit! 🔥" arrow>
+      <div className="roast-me-float" onClick={() => setShowRoastModal(true)}>
+        <img src={roast_me_icon} alt="Roast Me" className="roast-me-image" />
+      </div>
+      </Tooltip>
 
-      {/* <div className="protip-banner">
-        <div className="protip-icon">💡</div>
-        <div className="protip-text">
-          <strong>Pro Tip:</strong> Click <span className="highlight">"Create Memes"</span> to customize your own meme using any template!
-        </div>
-      </div> */}
+      <RoastMeModal isOpen={showRoastModal} onClose={() => setShowRoastModal(false)}/>
+     
     </div>
   );
 }
