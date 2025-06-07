@@ -248,6 +248,10 @@
   }
 }
 @media screen and (min-width: 361px) and (max-width: 380px){
+.meme-box{
+    margin-top: 20% !important;
+  }
+
 .roast-me-float {
   top: 24%;
 }
@@ -310,7 +314,7 @@
 
 @media screen and (max-width: 1024px) {
   .meme-box{
-    margin-top: 20%;
+    margin-top: 13%;
   }
 
 
