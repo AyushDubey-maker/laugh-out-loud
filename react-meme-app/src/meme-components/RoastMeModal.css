@@ -132,3 +132,9 @@
 .chat-input-container button:hover:not(:disabled) {
   background: #e05555;
 }
+
+@media screen and (max-width: 500px) {
+  .chat-input-container input {
+    font-size: 0.85rem;
+  }
+}
