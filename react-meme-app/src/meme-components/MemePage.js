@@ -24,6 +24,7 @@ function MemePage() {
   const [savedMemes, setSavedMemes] = useState([]);
   const [loadingNext, setLoadingNext] = useState(false);
   const [showRoastModal, setShowRoastModal] = useState(false);
+  const [memeLoading, setMemeLoading] = useState(false);
 
 
   const history = useHistory();
@@ -113,7 +114,7 @@ const goToNext = () => {
       if (nextIndex >= memes.length - 1) {
         fetchMemes(); // Preload next batch
       }
-
+      
       setMemeIndex(nextIndex);
       setLoadingNext(false);
     }, 300);
@@ -123,6 +124,7 @@ const goToNext = () => {
 const goToPrev = () => {
   const prevIndex = memeIndex - 1;
   if (prevIndex >= 0) {
+ 
     setMemeIndex(prevIndex);
   }
 };
@@ -173,22 +175,26 @@ const goToPrev = () => {
 </header>
 
 <div className="meme-box" {...swipeHandlers}>
-            {memes.length === 0 ? (
-            <div className="app-loading">
-              <div className="app-loading-container">
-                <Spinner name="ball-spin-fade-loader" color="lightbrown" fadeIn="none" />
+            {memes.length === 0 || memeLoading ? (
+              <div className="app-loading">
+                <div className="app-loading-container">
+                  <Spinner name="ball-spin-fade-loader" color="lightbrown" fadeIn="none" />
+                </div>
               </div>
-            </div>
-          ) : (
-            <img
+            ) : (
+              <img
+              key={memes[memeIndex]?.url} 
               alt="meme"
               src={memes[memeIndex]?.url}
+              onLoad={() => setMemeLoading(false)}
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = img_not_found;
+                setMemeLoading(false);
               }}
+              style={{ display: memeLoading ? 'none' : 'block' }}
             />
-          )}
+            )}
 
         {memes.length > 0 && memeIndex > 0 && (
           <ArrowBackIcon
@@ -222,7 +228,9 @@ const goToPrev = () => {
                 <span
                   key={i}
                   className={`dot ${absoluteIndex === memeIndex ? "active" : ""}`}
-                  onClick={() => setMemeIndex(absoluteIndex)}
+                  onClick={() => {
+                    setMemeIndex(absoluteIndex);
+                  }}
                 ></span>
               );
             });
