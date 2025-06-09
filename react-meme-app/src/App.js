@@ -7,6 +7,7 @@ import { GlobalProvider } from './redux/save-meme/GlobalState';
 import SaveList from './meme-components/SaveList';
 import GenerateMeme from './meme-components/Generate-Meme';
 import MemeGenerated from './meme-components/MemeGenerated';
+import GenerateMemeScratch from './meme-components/Generate-Meme-Scratch';
 
 function App() {
 
@@ -15,7 +16,9 @@ function App() {
       <GlobalProvider>
      <Router>
        <Switch>
-
+       <Route path='/generate-from-scratch'>
+        <GenerateMemeScratch/>
+       </Route>
        <Route path='/generated'>
           <MemeGenerated />
         </Route>

@@ -178,6 +178,11 @@ useEffect(() => {
       </header>
 
       <div className="generate_meme_div_header">
+        <div className="generate_meme_div_scratch">
+          <Button variant="outlined" className="header_button" onClick={() => history.push("/generate-from-scratch")}>
+            Generate From Scratch
+          </Button>
+        </div>
         <div className="input_conatiner">
           {captions.map((c, index) => (
             <input
@@ -204,6 +209,7 @@ useEffect(() => {
           )}
         </Button>
         </div>
+        
       </div>
       <div className="meme-box-container">
      
