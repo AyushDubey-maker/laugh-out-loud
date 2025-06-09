@@ -243,7 +243,7 @@ p{
 
 
 /* Scratch Mode Section */
-.scratch-tools {
+/* .scratch-tools {
   display: flex;
   gap: 12px;
   margin-top: 30px;
@@ -278,8 +278,7 @@ p{
   border: 2px dashed #ccc;
   display: inline-block;
   width: 420px;
-  /* max-width: 420px; */
-  height: 420px; /* gives visible height */
+  height: 420px; 
   background: #f8f8f8;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
@@ -402,4 +401,244 @@ p{
     height: 320px;
   }
 
+} */
+
+/* Scratch Tools */
+.scratch-tools {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.styled-input,
+.styled-upload-btn,
+.background-selector {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+
+.styled-upload-btn:hover,
+.styled-input:hover {
+  background: #f0f0f0;
+  border-color: #999;
+}
+
+.background-selector {
+  font-size: 14px;
+}
+
+.style-options {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+/* Scratch Preview Wrapper */
+.scratch-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  /* gap: 40px; */
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+/* Preview Box */
+.preview-area {
+  position: relative;
+  border: 2px dashed #ccc;
+  display: inline-block;
+  width: 420px;
+  height: 420px;
+  background: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  touch-action: none;
+  overflow: hidden;
+}
+
+.placeholder-text {
+  width: 100%;
+  height: 100%;
+  color: #aaa;
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.uploaded-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  border-radius: 4px;
+}
+
+/* Textbox Styling */
+.draggable-text {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #333;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 4px;
+  box-sizing: border-box;
+  overflow: hidden;
+  cursor: move;
+  touch-action: none;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+  border-radius: 4px;
+  word-break: break-word;
+}
+
+.no-border {
+  border: none !important;
+  outline: none !important;
+}
+
+.draggable-text-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Delete Button */
+.delete-textbox {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+  box-shadow: 0 0 4px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+/* Captured Meme Display */
+.captured-meme-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 420px;
+}
+
+.captured-meme-preview img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.captured-meme-preview h3 {
+  margin-bottom: 12px;
+  color: #333;
+}
+
+/* Buttons Layout */
+.capture-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.save-button {
+  margin-top: 15px;
+}
+
+.meme-editor{
+  display: flex;
+  align-items: center;
+}
+
+.editor-right{
+  max-width: 450px;
+}
+.captured-container{
+  margin-top: 16%;
+  margin-left: 5%;
+}
+.generated-image{
+  width: 420px;
+  height: 420px;
+}
+.generated-meme-txt{
+  text-align: center;
+}
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .meme-editor{
+    flex-direction: column;
+  }
+  .captured-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5%;
+  }
+  .scratch-preview{
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .scratch-preview {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .preview-area {
+    width: 320px;
+    height: 320px;
+  }
+
+  .captured-meme-preview {
+    max-width: 320px;
+  }
+
+
+  .generated-image{
+    width: 320px;
+    height: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .preview-area {
+    width: 280px;
+    height: 280px;
+  }
+
+  .draggable-text {
+    font-size: 14px;
+    padding: 3px;
+  }
+
+  .captured-meme-preview {
+    max-width: 280px;
+  }
+  .generated-image{
+    width: 280px;
+    height: 280px;
+  }
 }
