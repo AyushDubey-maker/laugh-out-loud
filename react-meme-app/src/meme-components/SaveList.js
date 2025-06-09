@@ -15,17 +15,7 @@ function SaveList() {
     const [haveMemes,setHaveMemes]=useState(true);
     const [memeCounter,setMemeCounter]=useState(0);
     
-    // useEffect(()=>{
-    //   db.collection('user-memes').doc(user?.uid).collection('memes').orderBy('timestamp','desc').onSnapshot(snapshot=>(
-    //     setSavelist(snapshot.docs.map(doc=>({
-    //       id:doc.id,
-    //       data:doc.data()
-    //     })))
-    //   ))
- 
-      
-    //   // eslint-disable-next-line
-    //   },[savelist])
+
             useEffect(() => {
           const unsubscribe = db
             .collection("user-memes")
