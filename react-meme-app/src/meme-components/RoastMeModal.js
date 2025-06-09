@@ -122,12 +122,12 @@ Bot:
 
   const handleSend = () => {
   const { count } = getQuota();
-  const maxAllowed = isLoggedIn ? 10 : 5;
+  const maxAllowed = isLoggedIn ? 10 : 3;
 
   if (count >= maxAllowed) {
     const msg = isLoggedIn
       ? "You've hit your roast limit for today. Come back tomorrow for more burns."
-      : "Want more roasts? Login to get 5 more today!";
+      : "Want more roasts? Login to get 7 more today!";
     setChatHistory(prev => [...prev, { type: "bot", text: msg }]);
     return;
   }
