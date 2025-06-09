@@ -359,7 +359,7 @@ function GenerateMemeScratch() {
           </div>
 
           <div className="scratch-preview">
-            <div className="preview-area" ref={previewRef} id="capture-area">
+            <div className={`preview-area ${isCapturing ? "no-border-capture" : ""}`} ref={previewRef} id="capture-area">
               {imageSrc ? (
                 <img src={imageSrc} alt="Preview" className="uploaded-image" />
               ) : (
