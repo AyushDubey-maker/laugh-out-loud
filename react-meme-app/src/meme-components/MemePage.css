@@ -187,30 +187,9 @@
 }
 
 
-/* .protip-banner {
-  margin-top: 30px;
-  padding: 16px 24px;
-  border-top: 2px dashed #d49267;
-  background-color: #fff8f1;
-  font-family: 'Segoe UI', sans-serif;
-  font-size: 18px;
-  color: #4b2e1c;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  border-radius: 0 0 12px 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+.generate_meme_img{
+  object-fit: contain;
 }
-
-.protip-banner .icon {
-  font-size: 22px;
-}
-
-.protip-banner .highlight {
-  font-weight: 600;
-  color: #2d1d0f;
-} */
 
 /* Roast Me Floating Button – Desktop & Mobile Styles */
 .roast-me-float {
@@ -245,6 +224,13 @@
   .roast-me-float {
     bottom: 20px; /* moves up slightly on small screens */
     right: 20px;
+  }
+  .generate_meme_img{
+    min-height: fit-content !important;
+    max-height: fit-content !important;
+  }
+  .generate_meme_title{
+    font-size: 18px;
   }
 }
 @media screen and (min-width: 361px) and (max-width: 380px){
@@ -296,6 +282,7 @@
   .meme-box {
     padding: 0.5rem;
     min-height: fit-content;
+    width: fit-content;
   }
 
   .prev {

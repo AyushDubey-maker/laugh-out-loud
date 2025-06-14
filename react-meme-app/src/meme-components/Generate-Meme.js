@@ -262,12 +262,12 @@ useEffect(() => {
         
  
       <div className="meme-box generate-meme-box">
-        <p>{generatememes[memeIndex]?.name}</p>
+        <p className="generate_meme_title">{generatememes[memeIndex]?.name}</p>
 
         {generatememes.length > 0 && generatememes[memeIndex] && !memeError && (
           <img
             key={generatememes[memeIndex].id}
-            className="meme_img"
+            className="meme_img generate_meme_img"
             alt="Generated Meme"
             src={buildMemeUrl(generatememes[memeIndex])}
             onLoad={() => {
