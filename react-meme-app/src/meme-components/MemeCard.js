@@ -36,9 +36,9 @@ function MemeCard({meme,type,id}) {
             <img src={meme.data.memes.url || meme.data.memes.data.url} alt="Meme"/>
             <div className='buttons_d'>
              <Button variant="outlined" color="secondary" onClick={deleteMeme}>Delete Meme<DeleteOutlineOutlinedIcon/></Button>
-            {meme.data.created===true && (
+           
               <Button title="You created this meme" onClick={copyLink} variant="outlined" color="primary">{copied?'Url Copied!':'Get URL🔗'}</Button>
-            )}
+            
             </div>
           </div>
         )}
