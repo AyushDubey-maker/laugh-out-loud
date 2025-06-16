@@ -6,8 +6,10 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { Rnd } from "react-rnd";
 import html2canvas from "html2canvas";
 import "./Generate-Meme.css";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import logo from "../assets/laugh-out-loud-logo.png";
+import firebase from "firebase/app";
+import "firebase/storage";
 
 function GenerateMemeScratch() {
   const [authUser, setUser] = useState(null);
@@ -17,6 +19,8 @@ function GenerateMemeScratch() {
   const [inputBg, setInputBg] = useState("white");
   const [isCapturing, setIsCapturing] = useState(false);
   const [fontColor, setFontColor] = useState("black");
+  const [isSaving, setIsSaving] = useState(false);
+
 
   const history = useHistory();
   const previewRef = useRef(null);
@@ -43,7 +47,8 @@ function GenerateMemeScratch() {
   const addTextBox = () => {
     setTextBoxes([
       ...textBoxes,
-      { id: Date.now(), text: "Text", x: 50, y: 50, width: 150, height: 40 },
+       { id: Date.now(), text: "Text", x: 50, y: 50, width: 150, height: 40 },
+     
     ]);
   };
 
@@ -67,6 +72,93 @@ function GenerateMemeScratch() {
     setIsCapturing(false);
   };
 
+    const fire_user = firebase.auth().currentUser;
+
+    // async function saveMeme() {
+    //   if (!fire_user) {
+    //     history.push("/login");
+    //     return;
+    //   }
+
+    //   if (!capturedImage) {
+    //     alert("Please generate a meme first.");
+    //     return;
+    //   }
+
+    //   try {
+    //    const storageRef = firebase.storage().ref();
+    //    const memePath = `memes/${fire_user.uid}/${Date.now()}.png`;
+    //    const memeRef = storageRef.child(memePath);
+
+    //    // Upload base64 image
+    //     await memeRef.putString(capturedImage, "data_url", {
+    //       contentType: "image/png"
+    //     });
+
+    //     // Get download URL
+    //     const downloadURL = await memeRef.getDownloadURL();
+    //     console.log(downloadURL)
+    //    // Save metadata to Firestore
+    //     await db
+    //       .collection("user-memes")
+    //       .doc(fire_user.uid)
+    //       .collection("memes")
+    //       .add({
+    //         memeURL: downloadURL,
+    //         storagePath: memePath,
+    //         timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    //       });
+
+      
+
+    //     alert("Meme Saved!");
+    //   } catch (error) {
+    //     console.error("Error saving meme:", error);
+    //     alert("Failed to save meme.");
+    //   }
+    // }
+    async function saveMeme() {
+      if (!fire_user) {
+        history.push("/login");
+        return;
+      }
+
+      if (!capturedImage) {
+        alert("Please generate a meme first.");
+        return;
+      }
+
+      try {
+        setIsSaving(true); // Disable button and show saving
+        const storageRef = firebase.storage().ref();
+        const memePath = `memes/${fire_user.uid}/${Date.now()}.png`;
+        const memeRef = storageRef.child(memePath);
+
+        // Upload base64 image
+        await memeRef.putString(capturedImage, "data_url", {
+          contentType: "image/png"
+        });
+
+        const downloadURL = await memeRef.getDownloadURL();
+
+        await db
+          .collection("user-memes")
+          .doc(fire_user.uid)
+          .collection("memes")
+          .add({
+            memeURL: downloadURL,
+            storagePath: memePath,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          });
+
+        history.push("/save"); 
+      } catch (error) {
+        console.error("Error saving meme:", error);
+        alert("Failed to save meme.");
+      } finally {
+        setIsSaving(false); // Re-enable if error occurs
+      }
+}
   return (
     <div className="meme-container">
       <header className="meme-header">
@@ -79,7 +171,7 @@ function GenerateMemeScratch() {
           />
         </div>
         <div className="header-right">
-          {authUser && <div className="user-avatar">{authUser.displayName?.[0].toUpperCase()}</div>}
+          {authUser && <div className="user-avatar" onClick={()=>history.push('/save')}>{authUser.displayName?.[0].toUpperCase()}</div>}
           {authUser && (
             <Button     variant="outlined" color="primary" className="header_button" onClick={() => history.push("/generate-meme")}>Create Memes <ArrowForwardIcon /></Button>
           )}
@@ -90,8 +182,8 @@ function GenerateMemeScratch() {
       <div className="meme-editor">
         <div className="editor-left">
           <div className="scratch-tools">
-            <label htmlFor="upload-input" className="styled-upload-btn">Choose Image or GIF</label>
-            <input id="upload-input" type="file" accept="image/*,image/gif" onChange={handleImageUpload} style={{ display: "none" }} />
+            <label htmlFor="upload-input" className="styled-upload-btn">Choose Image</label>
+            <input id="upload-input" type="file" accept="image/*" onChange={handleImageUpload} style={{ display: "none" }} />
             <select value={inputBg} onChange={(e) => setInputBg(e.target.value)}>
               <option disabled>Text Background</option>
               <option value="white">White</option>
@@ -116,34 +208,92 @@ function GenerateMemeScratch() {
                 <div className="placeholder-text">Preview</div>
               )}
               {imageSrc && textBoxes.map((box) => (
-                <Rnd key={box.id} bounds="parent" default={{ x: box.x, y: box.y, width: box.width, height: box.height }}
-                  onDragStop={(e, d) => setTextBoxes((prev) => prev.map((b) => b.id === box.id ? { ...b, x: d.x, y: d.y } : b))}
-                  onResizeStop={(e, direction, ref, delta, position) => setTextBoxes((prev) => prev.map((b) => b.id === box.id ? {
-                    ...b,
-                    width: parseInt(ref.style.width),
-                    height: parseInt(ref.style.height),
-                    ...position,
-                  } : b))}>
-                  <div className="draggable-text-container">
-                    <div
-                      contentEditable={!isCapturing}
-                      suppressContentEditableWarning
-                      className={`draggable-text ${isCapturing ? "no-border" : ""}`}
-                      style={{ backgroundColor: inputBg, color: fontColor }}
-                      onBlur={(e) => handleTextChange(e, box.id)}>
-                      {box.text}
-                    </div>
-                    {!isCapturing && (
-                      <button className="delete-textbox" onPointerDown={(e) => {
+                <Rnd
+                key={box.id}
+                bounds="parent"
+                enableResizing={!box.editing}
+                disableDragging={box.editing}
+                default={{
+                  x: box.x,
+                  y: box.y,
+                  width: box.width,
+                  height: box.height,
+                }}
+                onDragStop={(e, d) =>
+                  setTextBoxes((prev) =>
+                    prev.map((b) => (b.id === box.id ? { ...b, x: d.x, y: d.y } : b))
+                  )
+                }
+                onResizeStop={(e, direction, ref, delta, position) =>
+                  setTextBoxes((prev) =>
+                    prev.map((b) =>
+                      b.id === box.id
+                        ? {
+                            ...b,
+                            width: parseInt(ref.style.width),
+                            height: parseInt(ref.style.height),
+                            ...position,
+                          }
+                        : b
+                    )
+                  )
+                }
+              >
+                <div className="draggable-text-container">
+                  
+                  <div
+                  contentEditable={box.editing && !isCapturing}
+                  suppressContentEditableWarning
+                  className={`draggable-text ${isCapturing ? "no-border" : ""}`}
+                  style={{
+                    backgroundColor: inputBg,
+                    color: fontColor,
+                    touchAction: box.editing ? "auto" : "none",
+                  }}
+                  onTouchStart={(e) => {
+                    // Enable editing on mobile
+                    e.stopPropagation();
+                    setTextBoxes((prev) =>
+                      prev.map((b) =>
+                        b.id === box.id ? { ...b, editing: true } : { ...b, editing: false }
+                      )
+                    );
+                  }}
+                  onDoubleClick={(e) => {
+                    // Enable editing on desktop
+                    e.stopPropagation();
+                    setTextBoxes((prev) =>
+                      prev.map((b) =>
+                        b.id === box.id ? { ...b, editing: true } : { ...b, editing: false }
+                      )
+                    );
+                  }}
+                  onBlur={(e) => {
+                    handleTextChange(e, box.id);
+                    setTextBoxes((prev) =>
+                      prev.map((b) =>
+                        b.id === box.id ? { ...b, editing: false } : b
+                      )
+                    );
+                  }}
+                >
+                  {box.text}
+                </div>
+
+                  {!isCapturing && (
+                    <button
+                      className="delete-textbox"
+                      onPointerDown={(e) => {
                         e.stopPropagation();
                         e.preventDefault();
                         setTextBoxes((prev) => prev.filter((b) => b.id !== box.id));
-                      }}>
-                        <DeleteIcon fontSize="small" color="secondary" />
-                      </button>
-                    )}
-                  </div>
-                </Rnd>
+                      }}
+                    >
+                      <DeleteIcon fontSize="small" color="secondary" />
+                    </button>
+                  )}
+                </div>
+              </Rnd>
               ))}
             </div>
             <Button variant="contained" color="primary" disabled={!imageSrc} onClick={handleCapture} style={{ marginTop: "10px" }}>Preview Meme</Button>
@@ -155,9 +305,15 @@ function GenerateMemeScratch() {
             <div className="captured-container">
               <h3 className="generated-meme-txt">Generated Meme</h3>
               <img src={capturedImage} alt="Captured Meme" className="generated-image" />
-              <a href={capturedImage} download="meme.png">
-                <Button variant="contained" color="primary" style={{ marginTop: "10px" }}>Save Meme</Button>
-              </a>
+              <Button
+              onClick={saveMeme}
+              variant="contained"
+              color="primary"
+              disabled={isSaving}
+              style={{ marginTop: "10px" }}
+            >
+              {isSaving ? "Saving..." : "Save Meme"}
+            </Button>
             </div>
           )}
         </div>

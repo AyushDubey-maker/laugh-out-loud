@@ -141,7 +141,7 @@ useEffect(() => {
         </div>
         <div className="header-right">
           {fire_user && (
-            <div className="user-avatar" title={fire_user.displayName}>
+            <div className="user-avatar" title={fire_user.displayName} onClick={()=>history.push('/save')}>
               {fire_user.displayName?.[0].toUpperCase()}
             </div>
           )}

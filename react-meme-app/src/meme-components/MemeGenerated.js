@@ -38,7 +38,7 @@ function MemeGenerated() {
       </div>
       <div className="header-right">
                   {user && (
-                     <div className="user-avatar" title={user.displayName}>
+                     <div className="user-avatar" title={user.displayName} onClick={()=>history.push('/save')}> 
                        {user.displayName?.[0].toUpperCase()}
                      </div>
                    )}

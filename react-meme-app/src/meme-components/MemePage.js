@@ -38,7 +38,10 @@ function MemePage() {
       .collection("memes")
       .get()
       .then(snapshot => {
-        const savedUrls = snapshot.docs.map(doc => doc.data().memes.url);
+        const savedUrls = snapshot.docs.map(doc => {
+        const data = doc.data();
+        return data.memeURL || data.memes?.url || null;
+        }).filter(Boolean);
         setSavedMemes(savedUrls);
       });
         }
@@ -138,7 +141,7 @@ const goToPrev = () => {
   </div>
   <div className="header-right">
               {user && (
-                 <div className="user-avatar" title={user.displayName}>
+                 <div className="user-avatar" title={user.displayName} onClick={()=>history.push('/save')}>
                    {user.displayName?.[0].toUpperCase()}
                  </div>
                )}
