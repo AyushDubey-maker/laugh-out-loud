@@ -6,6 +6,7 @@ import firebase from 'firebase'
 import { useHistory } from 'react-router';
 import { Button } from '@material-ui/core';
 import Spinner from 'react-spinkit';
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import logo from "../assets/laugh-out-loud-logo.png";
 function SaveList() {
   
@@ -83,7 +84,7 @@ function SaveList() {
                   className="header_button"
                   onClick={() => history.push("/generate-meme")}
                 >
-                 Create Memes 🖍
+                 Create Memes <ArrowForwardIcon className="tilted-icon"/>
                 </Button>
               )}
               {user ? (
